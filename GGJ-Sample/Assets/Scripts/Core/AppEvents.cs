@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class AppEvents : MonoBehaviour
 {
-    public static Action<IState> OnGameStateUpdate;
+    public static Action<EGameState> OnGameStateUpdate;
+
+    public static Action<BubbleCreationConfig> OnCoinCreation;
     public static Action<CoinData> OnCoinUpdate;
 
     public static Action<float> OnBubblePop;

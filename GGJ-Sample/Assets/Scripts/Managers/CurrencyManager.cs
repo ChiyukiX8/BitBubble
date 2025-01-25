@@ -11,7 +11,12 @@ public class CurrencyManager : PersistentMonoSingleton<CurrencyManager>
     // Start is called before the first frame update
     void Start()
     {
-        
+        AppEvents.OnCoinCreation += CreateNewCoin;
+    }
+
+    void OnDestroy()
+    {
+        AppEvents.OnCoinCreation -= CreateNewCoin;
     }
 
     // Update is called once per frame
@@ -23,8 +28,8 @@ public class CurrencyManager : PersistentMonoSingleton<CurrencyManager>
         }
     }
 
-    public void CreateNewCoin()
+    public void CreateNewCoin(BubbleCreationConfig newConfig)
     {
-        
+        CurrentBubbles.Add(new CoinData(newConfig));
     }
 }

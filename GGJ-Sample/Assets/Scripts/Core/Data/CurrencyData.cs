@@ -28,15 +28,29 @@ public class CoinData
     public float Value {get {return _value;} set {_value = value;}}
 
     public float _initialInvestment = 0.0f;
-    public float InitialInvestment {get  {return _initialInvestment;} set {_initialInvestment = value;}}
+    public float Investment {get  {return _initialInvestment;} set {_initialInvestment = value;}}
 
     private float _rateOfChange = 0.01f;
     public float Rate {get {return _rateOfChange;}}
+
+    public CoinData(BubbleCreationConfig config)
+    {
+        Name = config.Name;
+        Value = config.InitialValue;
+    }
+
+    public CoinData(CoinData copy)
+    {
+        _name = copy._name;
+        _value = copy._value;
+        _initialInvestment = copy._initialInvestment;
+        _rateOfChange = copy._rateOfChange;
+    }
 
     public void UpdateValue()
     {
         _value *= _rateOfChange;
     }
 
-    public override string ToString() => $"(Value: {_value}, Rate: {_rateOfChange})";
+    public override string ToString() => $"(Name: {_name}, Value: {_value}, Investment: {_initialInvestment}, Rate: {_rateOfChange})";
 }

@@ -13,3 +13,9 @@ public abstract class GameStateBase : IState
     public virtual void OnExit() { }
     public virtual void OnUpdate() { }
 }
+
+public enum EGameState
+{
+    Menu,
+    Play
+}
