@@ -9,6 +9,8 @@ public class Bubble : MonoBehaviour
     [SerializeField]
     private GameObject pixelPrefab;
     [SerializeField]
+    private GameObject reflectionPixelPrefab;
+    [SerializeField]
     private Transform pixelContainer;
 
     private List<GameObject> drawnPixels = new List<GameObject>();
@@ -50,12 +52,12 @@ public class Bubble : MonoBehaviour
             {
                 if (Mathf.RoundToInt(Mathf.Sqrt(x * x + y * y)) == radius)
                 {
-                    SpawnPixel(x, y);
+                    SpawnPixel(pixelPrefab, x, y);
                 }
             }
         }
 
-        int reflectionRadius = Mathf.RoundToInt(radius * 0.6f);
+        int reflectionRadius = Mathf.RoundToInt(radius * 0.5f);
         for (int x = -reflectionRadius; x <= reflectionRadius; x++)
         {
             for (int y = -reflectionRadius; y <= reflectionRadius; y++)
@@ -64,16 +66,16 @@ public class Bubble : MonoBehaviour
 
                 if (Mathf.RoundToInt(Mathf.Sqrt(x * x + y * y)) == reflectionRadius)
                 {
-                    SpawnPixel(x, y);
+                    SpawnPixel(reflectionPixelPrefab, x, y);
                 }
             }
         }
     }
 
-    private void SpawnPixel(int x, int y)
+    private void SpawnPixel(GameObject prefab, int x, int y)
     {
         Vector3 spawnPosition = new Vector3(x, y, 0);
-        GameObject spawnedPixel = Instantiate(pixelPrefab, spawnPosition, Quaternion.identity, pixelContainer);
+        GameObject spawnedPixel = Instantiate(prefab, spawnPosition, Quaternion.identity, pixelContainer);
         spawnedPixel.name = $"({spawnedPixel.transform.position.x},{spawnedPixel.transform.position.y}";
         drawnPixels.Add(spawnedPixel);
     }
