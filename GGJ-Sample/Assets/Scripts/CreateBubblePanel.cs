@@ -72,7 +72,7 @@ public class CreateBubblePanel : MonoBehaviour
         _currentConfig = new BubbleCreationConfig(DEFAULT_NAME, 0, ColorSelector.SelectedColor, new HashSet<Vector2Int>());
         _nameField.text = "";
         _valueSlider.value = 0.0f;
-        SetName(_currentConfig.Name);
+        SetName("");
         SetValue(_currentConfig.InitialValue);
         SetColor(_currentConfig.Color);
         SetIcon(new HashSet<Vector2Int>());
@@ -109,7 +109,7 @@ public class CreateBubblePanel : MonoBehaviour
     {
         // Reach out to GameManager and set value to (value / GameManager.Money); replace 1000000 with current money value
         _currentConfig.InitialValue = Mathf.RoundToInt((value / 1.0f) * 10000f);
-        _valueText.text = "$" + _currentConfig.InitialValue.ToString();
+        _valueText.text = _currentConfig.InitialValue.ToString();
     }
 
     private void SetColor(Color color)
