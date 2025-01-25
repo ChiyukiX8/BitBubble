@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CurrencyManager : PersistentMonoSingleton<CurrencyManager>
 {
+    private GameManager _gameManager;
     public float InitalWealth = 10000.0f;
 
     public List<CoinData> CurrentBubbles = new List<CoinData>();
@@ -12,6 +13,12 @@ public class CurrencyManager : PersistentMonoSingleton<CurrencyManager>
     void Start()
     {
         AppEvents.OnCoinCreation.OnTrigger += CreateNewCoin;
+
+        if (_gameManager == null) 
+        {
+            _gameManager = GameManager.Instance;
+            AppEvents.OnGameStateUpdate.Trigger(EGameState.Play);
+        }
     }
 
     void OnDestroy()
