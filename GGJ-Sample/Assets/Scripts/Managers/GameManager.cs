@@ -15,7 +15,7 @@ public class GameManager : PersistentMonoSingleton<GameManager>
 
     void Start()
     {
-        AppEvents.OnGameStateUpdate += GameStateUpdated;
+        AppEvents.OnGameStateUpdate.OnTrigger += GameStateUpdated;
         StartButton.onClick.AddListener(StartGame);
 
         InitializeGameStates();
@@ -23,7 +23,7 @@ public class GameManager : PersistentMonoSingleton<GameManager>
 
     void OnDestroy()
     {
-        AppEvents.OnGameStateUpdate -= GameStateUpdated;
+        AppEvents.OnGameStateUpdate.OnTrigger -= GameStateUpdated;
     }
 
     // Update is called once per frame
@@ -41,7 +41,7 @@ public class GameManager : PersistentMonoSingleton<GameManager>
 
     public void StartGame()
     {
-        AppEvents.OnGameStateUpdate.Invoke(EGameState.Play);
+        AppEvents.OnGameStateUpdate.Trigger(EGameState.Play);
     }
 
     public void GameStateUpdated(EGameState stateId)

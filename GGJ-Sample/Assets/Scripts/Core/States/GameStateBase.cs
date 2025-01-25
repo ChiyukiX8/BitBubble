@@ -16,6 +16,7 @@ public abstract class GameStateBase : IState
 
 public enum EGameState
 {
+    NotSet,
     Menu,
     Play
 }

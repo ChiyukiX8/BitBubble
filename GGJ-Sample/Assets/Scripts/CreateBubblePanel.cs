@@ -129,7 +129,7 @@ public class CreateBubblePanel : MonoBehaviour
         {
             // spawn Bubble
             CreateBubble(_currentConfig);
-            AppEvents.OnCoinCreation.Invoke(_currentConfig);
+            AppEvents.OnCoinCreation.Trigger(_currentConfig);
             Close();
         }
     }

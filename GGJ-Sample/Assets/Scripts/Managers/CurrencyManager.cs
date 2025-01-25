@@ -11,12 +11,12 @@ public class CurrencyManager : PersistentMonoSingleton<CurrencyManager>
     // Start is called before the first frame update
     void Start()
     {
-        AppEvents.OnCoinCreation += CreateNewCoin;
+        AppEvents.OnCoinCreation.OnTrigger += CreateNewCoin;
     }
 
     void OnDestroy()
     {
-        AppEvents.OnCoinCreation -= CreateNewCoin;
+        AppEvents.OnCoinCreation.OnTrigger -= CreateNewCoin;
     }
 
     // Update is called once per frame
