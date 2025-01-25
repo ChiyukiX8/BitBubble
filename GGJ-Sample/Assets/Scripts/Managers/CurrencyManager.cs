@@ -6,7 +6,7 @@ public class CurrencyManager : PersistentMonoSingleton<CurrencyManager>
 {
     public float InitalWealth = 10000.0f;
 
-    public List<CoinData> CurrentBubbles;
+    public List<CoinData> CurrentBubbles = new List<CoinData>();
 
     // Start is called before the first frame update
     void Start()
