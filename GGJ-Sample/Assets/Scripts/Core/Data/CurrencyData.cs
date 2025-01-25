@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CoinData
 {
+    public Guid Id;
     private string _name;
     public string Name {get {return _name;} set {_name = value;}}
 
@@ -18,12 +20,14 @@ public class CoinData
 
     public CoinData(BubbleCreationConfig config)
     {
+        Id = config.Id;
         Name = config.Name;
         Value = config.InitialValue;
     }
 
     public CoinData(CoinData copy)
     {
+        Id = copy.Id;
         _name = copy._name;
         _value = copy._value;
         _initialInvestment = copy._initialInvestment;

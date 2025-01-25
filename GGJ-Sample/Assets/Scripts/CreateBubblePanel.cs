@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class CreateBubblePanel : MonoBehaviour
 {
@@ -127,6 +128,7 @@ public class CreateBubblePanel : MonoBehaviour
 
         if(Valid())
         {
+            _currentConfig.Id = Guid.NewGuid();
             // spawn Bubble
             CreateBubble(_currentConfig);
             AppEvents.OnCoinCreation.Trigger(_currentConfig);
@@ -141,6 +143,7 @@ public class CreateBubblePanel : MonoBehaviour
 
 public class BubbleCreationConfig
 {
+    public Guid Id;
     public string Name;
     public int InitialValue;
     public Color Color;
@@ -152,6 +155,7 @@ public class BubbleCreationConfig
     }
     public BubbleCreationConfig(BubbleCreationConfig copyFrom)
     {
+        Id = copyFrom.Id;
         Name = copyFrom.Name;
         InitialValue = copyFrom.InitialValue;
         Color = copyFrom.Color;
@@ -159,6 +163,7 @@ public class BubbleCreationConfig
     }
     public BubbleCreationConfig(string name, int value, Color color, HashSet<Vector2Int> icon)
     {
+        Id = new Guid();
         Name = name;
         InitialValue = value;
         Color = color;

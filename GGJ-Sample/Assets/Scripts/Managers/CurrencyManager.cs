@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,14 +7,14 @@ public class CurrencyManager : PersistentMonoSingleton<CurrencyManager>
     private GameManager _gameManager;
     public PlayerWealth Wealth = new PlayerWealth(10000.0f);
 
-    
 
-    private Dictionary<string,CoinData> CurrentBubbles = new Dictionary<string, CoinData>();
+    private Dictionary<Guid,CoinData> CurrentBubbles = new Dictionary<Guid, CoinData>();
 
     // Start is called before the first frame update
     void Start()
     {
         AppEvents.OnCoinCreation.OnTrigger += CreateNewCoin;
+        AppEvents.OnBubblePop.OnTrigger += BubblePopped;
 
         if (_gameManager == null) 
         {
@@ -26,6 +26,7 @@ public class CurrencyManager : PersistentMonoSingleton<CurrencyManager>
     void OnDestroy()
     {
         AppEvents.OnCoinCreation.OnTrigger -= CreateNewCoin;
+        AppEvents.OnBubblePop.OnTrigger -= BubblePopped;
     }
 
     // Update is called once per frame
@@ -39,7 +40,13 @@ public class CurrencyManager : PersistentMonoSingleton<CurrencyManager>
 
     public void CreateNewCoin(BubbleCreationConfig newConfig)
     {
-        CurrentBubbles.Add(newConfig.Name, new CoinData(newConfig));
+        CoinData coin =  new CoinData(newConfig);
+        CurrentBubbles.Add(coin.Id, coin);
         
+    }
+
+    public void BubblePopped(Guid coinId)
+    {
+        Wealth.TotalValue += CurrentBubbles[coinId].Value;
     }
 }

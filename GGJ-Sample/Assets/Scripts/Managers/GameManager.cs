@@ -16,7 +16,7 @@ public class GameManager : PersistentMonoSingleton<GameManager>
     void Start()
     {
         AppEvents.OnGameStateUpdate.OnTrigger += GameStateUpdated;
-        StartButton.onClick.AddListener(StartGame);
+        StartButton?.onClick.AddListener(StartGame);
 
         InitializeGameStates();
     }

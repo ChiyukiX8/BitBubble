@@ -10,7 +10,10 @@ public class AppEvents : MonoBehaviour
     public static readonly AppEvent<BubbleCreationConfig> OnCoinCreation = new AppEvent<BubbleCreationConfig>();
     public static readonly AppEvent<CoinData> OnCoinUpdate = new AppEvent<CoinData>();
 
-    public static readonly AppEvent<float> OnBubblePop = new AppEvent<float>();
+    public static readonly AppEvent<PlayerWealth> OnWealthUpdate = new AppEvent<PlayerWealth>();
+
+    public static readonly AppEvent<Guid> OnBubbleClick = new AppEvent<Guid>();
+    public static readonly AppEvent<Guid> OnBubblePop = new AppEvent<Guid>();
 }
 
 public abstract class BaseEvent
