@@ -2,23 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerWealth
-{
-    public float Value = 10000.0f;
-
-    public float RealizedGains = 0.0f;
-
-    public void UpdateWealth(float addedWealth)
-    {
-        Value += addedWealth;
-    }
-
-    public void UpdateGains()
-    {
-
-    }
-}
-
 public class CoinData
 {
     private string _name;
@@ -50,6 +33,7 @@ public class CoinData
     public void UpdateValue()
     {
         _value *= _rateOfChange;
+        AppEvents.OnCoinUpdate.Trigger(this);
     }
 
     public override string ToString() => $"(Name: {_name}, Value: {_value}, Investment: {_initialInvestment}, Rate: {_rateOfChange})";
