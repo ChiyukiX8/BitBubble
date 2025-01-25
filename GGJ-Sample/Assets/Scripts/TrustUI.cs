@@ -18,7 +18,17 @@ public class TrustUI : MonoBehaviour
 
     private void Awake()
     {
-        // make trust value set based on GameManager action
+        AppEvents.OnTrustUpdate.OnTrigger += TrustUpdated;
+    }
+
+    private void OnDestroy()
+    {
+        AppEvents.OnTrustUpdate.OnTrigger -= TrustUpdated;
+    }
+
+    private void TrustUpdated(TrustData data)
+    {
+        SetTrustValue(data.TotalValue);
     }
 
     private void SetTrustValue(float value)

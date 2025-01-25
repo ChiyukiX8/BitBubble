@@ -5,7 +5,7 @@ using UnityEngine;
 public class CurrencyManager : PersistentMonoSingleton<CurrencyManager>
 {
     private GameManager _gameManager;
-    public PlayerWealth Wealth = new PlayerWealth(10000.0f);
+    public WealthData Wealth = new WealthData(10000.0f);
 
 
     private Dictionary<Guid,CoinData> CurrentBubbles = new Dictionary<Guid, CoinData>();

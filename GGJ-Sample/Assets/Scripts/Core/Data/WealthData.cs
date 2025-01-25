@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerWealth
+public class WealthData
 {
     public float TotalValue = 10000.0f;
 
@@ -18,12 +18,12 @@ public class PlayerWealth
 
     }
 
-    public PlayerWealth(float value)
+    public WealthData(float value)
     {
         TotalValue = value;
     }
 
-    public PlayerWealth(PlayerWealth copy)
+    public WealthData(WealthData copy)
     {
         TotalValue = copy.TotalValue;
         RealizedGains = copy.RealizedGains;
