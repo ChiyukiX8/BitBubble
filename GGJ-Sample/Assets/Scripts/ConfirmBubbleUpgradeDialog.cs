@@ -9,7 +9,7 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
     public static ConfirmBubbleUpgradeDialog Instance;
 
     [SerializeField]
-    private GameObject _menuContainer;
+    private GameObject _backgroundBlocker;
     [SerializeField]
     private TextMeshProUGUI _upgradeNameText;
     [SerializeField]
@@ -22,6 +22,8 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
     private ColoredElementThemer _themer;
     [SerializeField]
     private TextMeshProUGUI _priceText;
+    [SerializeField]
+    private UIMenuAnimationController _animController;
 
     private BubbleUpgrade _selectedUpgrade;
 
@@ -34,12 +36,12 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
         }
         _confirmButton.onClick.AddListener(OnDialogConfirmed);
         _cancelButton.onClick.AddListener(OnDialogCancelled);
-
     }
 
     public void DrawPopDialog(string title, string description)
     {
-        _menuContainer.SetActive(true);
+        _backgroundBlocker.SetActive(true);
+        _animController.Show();
 
         _selectedUpgrade = null;
         _upgradeNameText.text = title;
@@ -57,7 +59,8 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
 
     public void DrawDialog(BubbleUpgrade upgrade)
     {
-        _menuContainer.SetActive(true);
+        _backgroundBlocker.SetActive(true);
+        _animController.Show();
 
         _selectedUpgrade = upgrade;
 
@@ -102,16 +105,19 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
         }
 
         GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.SelectConfirmSFX, Constants.UI_SFX_VOLUME_MODIFER);
-
-
-        _menuContainer.SetActive(false);
-        AppEvents.OnCoinUpdate.OnTrigger -= UpdatePriceText;
+        Close();
 
     }
     private void OnDialogCancelled()
     {
         GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.SelectCancelSFX, Constants.UI_SFX_VOLUME_MODIFER);
-        _menuContainer.SetActive(false);
+        Close();
+    }
+
+    private void Close()
+    {
+        _backgroundBlocker.gameObject.SetActive(false);
+        _animController.Hide();
         AppEvents.OnCoinUpdate.OnTrigger -= UpdatePriceText;
     }
 }

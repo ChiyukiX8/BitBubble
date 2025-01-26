@@ -31,6 +31,10 @@ public class CreateBubblePanel : MonoBehaviour
     private Button _confirmButton;
     [SerializeField]
     private Button _closeButton;
+    [SerializeField]
+    private UIMenuAnimationController _menuAnimController;
+    [SerializeField]
+    private UIMenuAnimationController _buttonAnimController;
 
     private BubbleCreationConfig _currentConfig = new BubbleCreationConfig();
 
@@ -53,6 +57,11 @@ public class CreateBubblePanel : MonoBehaviour
         ClearConfig();
 
         _drawingZone.Initialize();
+    }
+
+    private void Start()
+    {
+        _buttonAnimController.Show();
     }
 
     private void Update()
@@ -111,13 +120,13 @@ public class CreateBubblePanel : MonoBehaviour
         GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.SelectSFX, Constants.UI_SFX_VOLUME_MODIFER);
 
         // Pause game?
-        _bubbleMenu.SetActive(true);
-        _openMenuButton.gameObject.SetActive(false);
+        _menuAnimController.Show();
+        _buttonAnimController.Hide();
     }
     private void Close()
     {
-        _bubbleMenu.SetActive(false);
-        _openMenuButton.gameObject.SetActive(true);
+        _menuAnimController.Hide();
+        _buttonAnimController.Show();
     }
 
     private void SetName(string name)

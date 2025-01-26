@@ -32,6 +32,8 @@ public class BubbleUpgradeMenu : MonoBehaviour
     private BubbleUpgradeButton _politicalEndorsementButton;
     [SerializeField]
     private Button _popBubbleButton;
+    [SerializeField]
+    private UIMenuAnimationController _animController;
 
     private GrowthBubbleUpgrade _newsArticleUpgrade;
     private GrowthBubbleUpgrade _influencerUpgrade;
@@ -64,9 +66,16 @@ public class BubbleUpgradeMenu : MonoBehaviour
 
     public void OpenBubbleMenu(Guid bubbleGuid)
     {
-        _menuContainer.SetActive(true);
+        if(_openedBubble == bubbleGuid)
+        {
+            return;
+        }
+
+        _animController.Show();
 
         _openedBubble = bubbleGuid;
+
+        GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.BubbleSelectedSFX, Constants.UI_SFX_VOLUME_MODIFER);
 
         // find bubble creation config via guid and generate menu data
         BubbleCreationConfig config = CurrencyManager.Instance.BubbleConfigLookup(bubbleGuid);
@@ -86,7 +95,7 @@ public class BubbleUpgradeMenu : MonoBehaviour
     public void Close()
     {
         // Make it animate down
-        _menuContainer.SetActive(false);
+        _animController.Hide();
         _openedBubble = Guid.Empty;
     }
 
