@@ -14,7 +14,7 @@ public class AppEvents : MonoBehaviour
 
     public static readonly AppEvent<TrustData> OnTrustUpdate = new AppEvent<TrustData>();
 
-    public static readonly AppEvent<BubbleUpgrade> OnUpgradePurchase = new AppEvent<BubbleUpgrade>();
+    public static readonly AppEvent<Guid, BubbleUpgrade> OnUpgradePurchase = new AppEvent<Guid, BubbleUpgrade>();
 
     public static readonly AppEvent<Guid> OnBubbleClick = new AppEvent<Guid>();
     public static readonly AppEvent<Guid> OnBubblePop = new AppEvent<Guid>();

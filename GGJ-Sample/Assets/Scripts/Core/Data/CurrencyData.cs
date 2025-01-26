@@ -39,13 +39,19 @@ public class CoinData
 
     public void UpdateValue()
     {
-        _value *= (_rateOfChange + UpgradeSum());
+        _value += (_rateOfChange + UpgradeSum());
         AppEvents.OnCoinUpdate.Trigger(this);
     }
 
     public void AddUpgrade(GrowthBubbleUpgrade newUpgrade)
     {
         Upgrades.Add(newUpgrade);
+        _rateOfChange += newUpgrade.GrowthMagnitude;
+    }
+
+    public void RemoveUpgrade()
+    {
+
     }
 
     public float UpgradeSum()

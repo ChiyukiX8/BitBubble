@@ -65,6 +65,7 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
         if(_selectedUpgrade.CanPurchase())
         {
             Debug.Log("UPGRADE PURCHASED");
+            CurrencyManager.Instance.PurchaseUpgrade(openedbubble, _selectedUpgrade);
         }
 
         _menuContainer.SetActive(false);

@@ -15,6 +15,10 @@ public class BubbleUpgradeMenu : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _bubbleNameText;
     [SerializeField]
+    private TextMeshProUGUI _bubbleValueText;
+    [SerializeField]
+    private TextMeshProUGUI _bubbleGrowthText;
+    [SerializeField]
     private Button _collapseButton;
     [SerializeField]
     private ColoredElementThemer _themer;
@@ -48,11 +52,18 @@ public class BubbleUpgradeMenu : MonoBehaviour
         }
         _collapseButton.onClick.AddListener(OnCollapseButtonClicked);
 
+        AppEvents.OnCoinUpdate.OnTrigger += OnCoinUpdated;
+
         InitializeUpgradeValues();
 
         _newsArticleButton.SetUpgrade(_newsArticleUpgrade);
         _influencerButton.SetUpgrade(_influencerUpgrade);
         _politicalEndorsementButton.SetUpgrade(_politicalEndorsementUpgrade);
+    }
+
+    private void OnDestroy()
+    {
+        AppEvents.OnCoinUpdate.OnTrigger -= OnCoinUpdated;
     }
 
     public void OpenBubbleMenu(Guid bubbleGuid)
@@ -69,8 +80,11 @@ public class BubbleUpgradeMenu : MonoBehaviour
         // 2. set name text
 
         // find coin data via guid and generate menu data
+        CoinData coin = CurrencyManager.Instance.CurrentBubbles[_openedBubble];
         // 1. show growth rate
+        _bubbleValueText.text = Mathf.RoundToInt(coin.Value).ToString();
         // 2. show value
+        _bubbleGrowthText.text = coin.Rate.ToString();
     }
 
     private void OnCollapseButtonClicked()
@@ -86,5 +100,14 @@ public class BubbleUpgradeMenu : MonoBehaviour
         _newsArticleUpgrade = new GrowthBubbleUpgrade(5000, 1.25f, 1.5f, 100, NEWS_ARTICLE_NAME, NEWS_ARTICLE_DESCRIPTION);
         _influencerUpgrade = new GrowthBubbleUpgrade(25000, 2.5f, 2.25f, 200, INFLUENCER_NAME, INFLUENCER_DESCRIPTION);
         _politicalEndorsementUpgrade = new GrowthBubbleUpgrade(100000, 5f, 3.5f, 300, POLITICAL_NAME, POLITICAL_DESCRIPTION);
+    }
+
+    private void OnCoinUpdated(CoinData coin)
+    {
+        if (OpenedBubble.Equals(coin.Id))
+        {
+            _bubbleGrowthText.text = Mathf.Round(coin.Rate).ToString();
+            _bubbleValueText.text = coin.Value.ToString();
+        }
     }
 }

@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityTimer;
 
 public class CurrencyManager : PersistentMonoSingleton<CurrencyManager>
 {
     private GameManager _gameManager;
+
+    private Timer _coinUpdateTimer;
     public WealthData Wealth = new WealthData(10000.0f);
 
 
-    private Dictionary<Guid,CoinData> CurrentBubbles = new Dictionary<Guid, CoinData>();
+    public Dictionary<Guid,CoinData> CurrentBubbles = new Dictionary<Guid, CoinData>();
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +26,8 @@ public class CurrencyManager : PersistentMonoSingleton<CurrencyManager>
         }
 
         AppEvents.OnWealthUpdate.Trigger(Wealth);
+
+        _coinUpdateTimer = Timer.Register(1.0f, UpdateCoins, isLooped:true);
     }
 
     void OnDestroy()
@@ -31,8 +36,7 @@ public class CurrencyManager : PersistentMonoSingleton<CurrencyManager>
         AppEvents.OnBubblePop.OnTrigger -= BubblePopped;
     }
 
-    // Update is called once per frame
-    void Update()
+    void UpdateCoins()
     {
         foreach (var coin in CurrentBubbles)
         {

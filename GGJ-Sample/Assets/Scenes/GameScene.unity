@@ -122,6 +122,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &26245275 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5765393917657075115, guid: f32a509675643444c822275a731d57fc,
+    type: 3}
+  m_PrefabInstance: {fileID: 58915606}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &49202291
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,6 +560,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0.000015258789
       objectReference: {fileID: 0}
+    - target: {fileID: 8082677446271383470, guid: f32a509675643444c822275a731d57fc,
+        type: 3}
+      propertyPath: _bubbleValueText
+      value: 
+      objectReference: {fileID: 26245275}
+    - target: {fileID: 8082677446271383470, guid: f32a509675643444c822275a731d57fc,
+        type: 3}
+      propertyPath: _bubbleGrowthText
+      value: 
+      objectReference: {fileID: 1740516128}
     - target: {fileID: 8143237836369588834, guid: f32a509675643444c822275a731d57fc,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -909,6 +931,18 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!114 &1740516128 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4230294169079397950, guid: f32a509675643444c822275a731d57fc,
+    type: 3}
+  m_PrefabInstance: {fileID: 58915606}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3256625431914791500
 PrefabInstance:
   m_ObjectHideFlags: 0
