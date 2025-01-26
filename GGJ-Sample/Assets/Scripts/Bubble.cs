@@ -61,27 +61,6 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
         Destroy(gameObject, 5.0f);
     }
 
-    private void Update()
-    {
-        // For testing sizes for now
-        if(Input.GetKeyDown(KeyCode.Equals))
-        {
-            radius++;
-            DrawBubble(radius);
-            DrawIcon(config.Icon);
-        }
-        else if(Input.GetKeyDown(KeyCode.Minus))
-        {
-            radius--;
-            DrawBubble(radius);
-            DrawIcon(config.Icon);
-        }
-        if(Input.GetKeyDown(KeyCode.X))
-        {
-            Pop();
-        }
-    }
-
     private void DrawBubble(float radius)
     {
         if (radius == 0) return;
