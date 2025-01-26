@@ -30,6 +30,8 @@ public class BubbleUpgradeMenu : MonoBehaviour
     private BubbleUpgradeButton _influencerButton;
     [SerializeField]
     private BubbleUpgradeButton _politicalEndorsementButton;
+    [SerializeField]
+    private Button _popBubbleButton;
 
     private GrowthBubbleUpgrade _newsArticleUpgrade;
     private GrowthBubbleUpgrade _influencerUpgrade;
@@ -43,6 +45,9 @@ public class BubbleUpgradeMenu : MonoBehaviour
     private const string INFLUENCER_DESCRIPTION = "Pay an influencer to run a social media campaign for your currency.";
     private const string POLITICAL_NAME = "Political Endorsement";
     private const string POLITICAL_DESCRIPTION = "Pay a politician to publicly endourse your currency.";
+    private const string POP_DESCRIPTION = "Popping this will take it off the market, and give you all the money others have invested.\nYour trust will decrease for every active buyer.";
+    private const string GROWTH_PREFIX = "Growth: ";
+    private const string VALUE_PREFIX = "Value: ";
 
     private void Awake()
     {
@@ -59,6 +64,7 @@ public class BubbleUpgradeMenu : MonoBehaviour
         _newsArticleButton.SetUpgrade(_newsArticleUpgrade);
         _influencerButton.SetUpgrade(_influencerUpgrade);
         _politicalEndorsementButton.SetUpgrade(_politicalEndorsementUpgrade);
+        _popBubbleButton.onClick.AddListener(OnPopBubbleClicked);
     }
 
     private void OnDestroy()
@@ -82,9 +88,14 @@ public class BubbleUpgradeMenu : MonoBehaviour
         // find coin data via guid and generate menu data
         CoinData coin = CurrencyManager.Instance.CurrentBubbles[_openedBubble];
         // 1. show growth rate
-        _bubbleValueText.text = Mathf.RoundToInt(coin.Value).ToString();
+        _bubbleValueText.text = VALUE_PREFIX + Mathf.RoundToInt(coin.Value).ToString();
         // 2. show value
-        _bubbleGrowthText.text = coin.Rate.ToString();
+        _bubbleGrowthText.text = GROWTH_PREFIX + coin.Rate.ToString();
+    }
+
+    public void Close()
+    {
+        OnCollapseButtonClicked();
     }
 
     private void OnCollapseButtonClicked()
@@ -106,8 +117,16 @@ public class BubbleUpgradeMenu : MonoBehaviour
     {
         if (OpenedBubble.Equals(coin.Id))
         {
-            _bubbleGrowthText.text = Mathf.Round(coin.Rate).ToString();
-            _bubbleValueText.text = coin.Value.ToString();
+            _bubbleGrowthText.text = GROWTH_PREFIX + Mathf.Round(coin.Rate).ToString();
+            _bubbleValueText.text = VALUE_PREFIX + coin.Value.ToString();
         }
+    }
+
+    private void OnPopBubbleClicked()
+    {
+        BubbleCreationConfig currentBubble = CurrencyManager.Instance.BubbleConfigLookup(_openedBubble);
+        string title = "Pop " + currentBubble.Name + "?";
+        string description = POP_DESCRIPTION;
+        ConfirmBubbleUpgradeDialog.Instance.DrawPopDialog(title, description);
     }
 }

@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 public class Bubble : MonoBehaviour, IPointerDownHandler
 {
     public int Radius => radius;
+
+    public UnityEvent<Bubble> OnBubblePopped = new UnityEvent<Bubble>();
 
     [Header("References")]
     [SerializeField]
@@ -17,9 +20,11 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
     private Transform iconContainer;
     [SerializeField]
     private Transform iconScalePivot;
+    [SerializeField]
+    private GameObject popParticlesPrefab;
 
-    private List<GameObject> drawnBubblePixels = new List<GameObject>();
-    private List<GameObject> drawnIconPixels = new List<GameObject>();
+    private List<BubblePixel> drawnBubblePixels = new List<BubblePixel>();
+    private List<BubblePixel> drawnIconPixels = new List<BubblePixel>();
 
     public BubbleCreationConfig config;
     private float iconSizeFunction => (1f / 16f) * radius;
@@ -47,21 +52,15 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
         AppEvents.OnCoinUpdate.OnTrigger -= OnCoinUpdated;
     }
 
-    private void Update()
+    public void Pop()
     {
-        // For testing sizes for now
-        if(Input.GetKeyDown(KeyCode.Equals))
-        {
-            radius++;
-            DrawBubble(radius);
-            DrawIcon(config.Icon);
-        }
-        else if(Input.GetKeyDown(KeyCode.Minus))
-        {
-            radius--;
-            DrawBubble(radius);
-            DrawIcon(config.Icon);
-        }
+        Instantiate(popParticlesPrefab, transform.position, Quaternion.identity, null);
+
+        // Invoke event, causes all pixels to get pushed outward from center
+        OnBubblePopped?.Invoke(this);
+
+        gameObject.SetActive(false);
+        Destroy(gameObject, 5.0f);
     }
 
     private void DrawBubble(int radius)
@@ -71,7 +70,7 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
         // Clear all existing pixels, pop from end of list
         for(int i = drawnBubblePixels.Count - 1; i >= 0; i--)
         {
-            Destroy(drawnBubblePixels[i]);
+            Destroy(drawnBubblePixels[i].gameObject);
         }
         drawnBubblePixels.Clear();
 
@@ -114,7 +113,7 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
         iconScalePivot.localScale = new Vector3(iconSizeFunction, iconSizeFunction, 1);
     }
 
-    private void SpawnPixel(GameObject prefab, Transform parent, int x, int y, Color color, ref List<GameObject> collection, int order = 0)
+    private void SpawnPixel(GameObject prefab, Transform parent, int x, int y, Color color, ref List<BubblePixel> collection, int order = 0)
     {
         Vector3 spawnPosition = new Vector3(x, y, 0);
         GameObject spawnedPixel = Instantiate(prefab, parent);
@@ -123,7 +122,10 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
         sprite.sortingOrder = order;
         sprite.color = color;
         spawnedPixel.name = $"({spawnedPixel.transform.position.x},{spawnedPixel.transform.position.y}";
-        collection.Add(spawnedPixel);
+
+        BubblePixel bubblePixel = spawnedPixel.GetComponent<BubblePixel>();
+        bubblePixel.Setup(this);
+        collection.Add(bubblePixel);
     }
 
     private void OnCoinUpdated(CoinData data)
