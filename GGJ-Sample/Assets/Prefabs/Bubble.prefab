@@ -149,6 +149,8 @@ MonoBehaviour:
   bubbleContainer: {fileID: 4553974477714679453}
   iconContainer: {fileID: 245753258108142519}
   iconScalePivot: {fileID: 8581000493880442703}
+  popParticlesPrefab: {fileID: 2636154070435455887, guid: f4df6173c7680a04998ac123d137142a,
+    type: 3}
 --- !u!58 &9104824045016074265
 CircleCollider2D:
   m_ObjectHideFlags: 0
