@@ -55,6 +55,10 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 3e9a2caca1b6881409af74a0bf670574, type: 3}
     - {fileID: 8300000, guid: cd8101a110f67994eb30777654bd52a1, type: 3}
     - {fileID: 8300000, guid: cb20bca2d7c7061409171246528f8a20, type: 3}
+  BubbleSelectedSFX:
+    _clips:
+    - {fileID: 8300000, guid: bde71c81e30746d46a32174be3d5a455, type: 3}
+    - {fileID: 8300000, guid: f5934910af3283d4d9a096b223dd333b, type: 3}
   BubbleUpgradeNewsSFX:
     _clips:
     - {fileID: 8300000, guid: 6aea2613c57b71649864624a36caec99, type: 3}

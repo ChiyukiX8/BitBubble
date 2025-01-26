@@ -10,6 +10,8 @@ public class GlobalAudioSource : MonoBehaviour
 
     private AudioSource _audioSource;
 
+    private float _baseVolume = 0.25f;
+
     private void Awake()
     {
         if(Instance == null)
@@ -19,21 +21,22 @@ public class GlobalAudioSource : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
     }
 
-    public static void PlayOneShot(AudioClip clip, float pitch)
+    public static void PlayOneShot(AudioClip clip, float pitch = 1.0f, float volumeModifier = 1.0f)
     {
+        Instance._audioSource.volume = Instance._baseVolume * volumeModifier;
         Instance._audioSource.pitch = pitch;
         Instance._audioSource.PlayOneShot(clip);
     }
 
-    public static void PlayAudioClipGroup(AudioClipGroup clips, float linearValue = 1.0f)
+    public static void PlayAudioClipGroup(AudioClipGroup clips, float volumeModifier = 1.0f, float linearValue = 1.0f)
     {
         if (clips is AudioClipGroupLinear linearClips && linearValue != -1.0f)
         {
-            PlayOneShot(linearClips.GetLinearClip(linearValue), GetRandomPitch());
+            PlayOneShot(linearClips.GetLinearClip(linearValue), GetRandomPitch(), volumeModifier);
         }
         else
         {
-            PlayOneShot(clips.GetRandomClip(), GetRandomPitch());
+            PlayOneShot(clips.GetRandomClip(), GetRandomPitch(), volumeModifier);
         }
     }
 

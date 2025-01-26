@@ -13,4 +13,6 @@ public static class Constants
     public const string POP_DESCRIPTION = "Popping this will take it off the market, and give you all the money others have invested.\nYour trust will decrease for every active buyer.";
     public const string GROWTH_PREFIX = "Growth: ";
     public const string VALUE_PREFIX = "Value: ";
+
+    public const float UI_SFX_VOLUME_MODIFER = 0.1f;
 }

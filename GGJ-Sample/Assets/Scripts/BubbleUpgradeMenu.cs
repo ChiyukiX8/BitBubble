@@ -85,14 +85,16 @@ public class BubbleUpgradeMenu : MonoBehaviour
 
     public void Close()
     {
-        OnCollapseButtonClicked();
+        // Make it animate down
+        _menuContainer.SetActive(false);
+        _openedBubble = Guid.Empty;
     }
 
     private void OnCollapseButtonClicked()
     {
-        // Make it animate down
-        _menuContainer.SetActive(false);
-        _openedBubble = Guid.Empty;
+        Close();
+
+        GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.SelectCancelSFX, Constants.UI_SFX_VOLUME_MODIFER);
     }
 
     private void InitializeUpgradeValues()
@@ -118,5 +120,7 @@ public class BubbleUpgradeMenu : MonoBehaviour
         string title = "Pop " + currentBubble.Name + "?";
         string description = Constants.POP_DESCRIPTION;
         ConfirmBubbleUpgradeDialog.Instance.DrawPopDialog(title, description);
+
+        GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.SelectSFX, Constants.UI_SFX_VOLUME_MODIFER);
     }
 }

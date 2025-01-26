@@ -25,5 +25,7 @@ public class BubbleUpgradeButton : MonoBehaviour
     private void OnButtonClicked()
     {
         ConfirmBubbleUpgradeDialog.Instance.DrawDialog(_upgrade);
+
+        GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.SelectSFX, Constants.UI_SFX_VOLUME_MODIFER);
     }
 }

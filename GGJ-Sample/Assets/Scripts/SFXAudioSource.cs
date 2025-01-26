@@ -6,9 +6,9 @@ public class SFXAudioSource : MonoBehaviour
 {
     private AudioSource _source;
 
-    public void PlayGlobal(AudioClipGroup clips, float linearValue = -1.0f)
+    public void PlayGlobal(AudioClipGroup clips, float volumeModifier = 1.0f, float linearValue = -1.0f)
     {
-        GlobalAudioSource.PlayAudioClipGroup(clips, linearValue);
+        GlobalAudioSource.PlayAudioClipGroup(clips, volumeModifier, linearValue);
     }
     public void PlayLocal(AudioClipGroup clips, float linearValue = -1.0f)
     {

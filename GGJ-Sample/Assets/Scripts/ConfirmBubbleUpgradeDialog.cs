@@ -88,7 +88,7 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
             // idc anymore just use gameobject.find :'(
             CurrencyManager.Instance.BubbleLookup(openedbubble).Pop();
 
-            GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.PopBubbleSFX);
+            GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.PopBubbleSFX, 0.5f);
             // Reach out to currency manager and give us money for the pop, and call other popping logic
             AppEvents.OnBubblePop.Trigger(openedbubble);
         }
@@ -101,6 +101,8 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
             }
         }
 
+        GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.SelectConfirmSFX, Constants.UI_SFX_VOLUME_MODIFER);
+
 
         _menuContainer.SetActive(false);
         AppEvents.OnCoinUpdate.OnTrigger -= UpdatePriceText;
@@ -108,6 +110,7 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
     }
     private void OnDialogCancelled()
     {
+        GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.SelectCancelSFX, Constants.UI_SFX_VOLUME_MODIFER);
         _menuContainer.SetActive(false);
         AppEvents.OnCoinUpdate.OnTrigger -= UpdatePriceText;
     }

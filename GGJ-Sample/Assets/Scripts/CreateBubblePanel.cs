@@ -107,6 +107,9 @@ public class CreateBubblePanel : MonoBehaviour
     private void Open()
     {
         ClearConfig();
+
+        GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.SelectSFX, Constants.UI_SFX_VOLUME_MODIFER);
+
         // Pause game?
         _bubbleMenu.SetActive(true);
         _openMenuButton.gameObject.SetActive(false);
@@ -147,12 +150,17 @@ public class CreateBubblePanel : MonoBehaviour
             CreateBubble(_currentConfig);
             CurrencyManager.Instance.Wealth.TotalValue -= _currentConfig.InitialValue;
             AppEvents.OnCoinCreation.Trigger(_currentConfig);
+
+            GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.SelectConfirmSFX, Constants.UI_SFX_VOLUME_MODIFER);
+
             Close();
         }
     }
     private void OnCloseButtonClicked()
     {
         Close();
+
+        GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.SelectCancelSFX, Constants.UI_SFX_VOLUME_MODIFER);
     }
 }
 

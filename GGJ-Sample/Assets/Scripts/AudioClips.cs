@@ -8,6 +8,7 @@ public class AudioClips : MonoBehaviour
 
     public AudioClipGroup CreateBubbleSFX;
     public AudioClipGroup PopBubbleSFX;
+    public AudioClipGroup BubbleSelectedSFX;
 
     public AudioClipGroup BubbleUpgradeNewsSFX;
     public AudioClipGroup BubbleUpgradeInfluencerSFX;
