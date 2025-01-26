@@ -20,4 +20,9 @@ public class TrustData
     {
         TotalValue = copy.TotalValue;
     }
+
+    public void Clamp01()
+    {
+        TotalValue = Mathf.Clamp01(TotalValue);
+    }
 }

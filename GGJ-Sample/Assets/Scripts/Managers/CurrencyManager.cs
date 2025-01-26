@@ -81,6 +81,8 @@ public class CurrencyManager : PersistentMonoSingleton<CurrencyManager>
     public void BubblePopped(Guid coinId)
     {
         Wealth.TotalValue += CurrentBubbles[coinId].Value;
+        TrustManager.Instance.OnBubblePopped(coinId);
+        CurrentBubbles.Remove(coinId);
         AppEvents.OnWealthUpdate.Trigger(Wealth);
     }
 }

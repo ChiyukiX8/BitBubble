@@ -88,6 +88,7 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
             CurrencyManager.Instance.BubbleLookup(openedbubble).Pop();
 
             // Reach out to currency manager and give us money for the pop, and call other popping logic
+            AppEvents.OnBubblePop.Trigger(openedbubble);
         }
         else
         {

@@ -50,7 +50,6 @@ public class CoinData
     private void UpdateTimer()
     {
         _timer.Cancel();
-        //_timer = null;
         StartTimer();
     }
 
