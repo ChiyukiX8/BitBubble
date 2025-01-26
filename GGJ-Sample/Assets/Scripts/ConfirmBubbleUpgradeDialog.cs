@@ -21,6 +21,8 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
     [SerializeField]
     private ColoredElementThemer _themer;
 
+    private BubbleUpgrade _selectedUpgrade;
+
 
     private void Awake()
     {
@@ -36,6 +38,8 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
     public void DrawDialog(BubbleUpgrade upgrade)
     {
         _menuContainer.SetActive(true);
+
+        _selectedUpgrade = upgrade;
 
         _upgradeNameText.text = upgrade.Name;
         _descriptionText.text = upgrade.Description;
@@ -53,7 +57,10 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
         // Push the upgrade to the bubble stored via guid
         Guid openedbubble = BubbleUpgradeMenu.OpenedBubble;
 
-        Debug.Log("UPGRADE PURCHASED");
+        if(_selectedUpgrade.CanPurchase())
+        {
+            Debug.Log("UPGRADE PURCHASED");
+        }
 
         _menuContainer.SetActive(false);
 

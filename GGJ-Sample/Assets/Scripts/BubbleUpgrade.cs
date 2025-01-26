@@ -26,10 +26,11 @@ public abstract class BubbleUpgrade
     }
     public bool CanPurchase()
     {
-        return true;
+        return CurrencyManager.Instance.Wealth.TotalValue >= _cost;
     }
     public void PurchaseUpgrade(Guid bubbleGuid)
     {
+        _cost = Mathf.RoundToInt(_baseCost * (_purchaseCount * _priceIncreaseMultiplier));
         _purchaseCount++;
     }
     public abstract BubbleUpgrade Copy();
