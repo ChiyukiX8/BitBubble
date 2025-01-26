@@ -50,6 +50,7 @@ MonoBehaviour:
   _clickFXPrefab: {fileID: 5263328261143482267, guid: beab881288637ef48b380d3cffc2626d,
     type: 3}
   _audioSource: {fileID: 1381886659250943981}
+  _cursorAnimator: {fileID: 5934460943070526952}
 --- !u!82 &2294822375763554465
 AudioSource:
   m_ObjectHideFlags: 0
@@ -168,6 +169,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8381344381639590570}
   - component: {fileID: 2136349642357257867}
+  - component: {fileID: 5934460943070526952}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -242,3 +244,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &5934460943070526952
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6519262574499982122}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 49345c80d070d8d408000864a2df60af, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

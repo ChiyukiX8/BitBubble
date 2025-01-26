@@ -223,7 +223,7 @@ PrefabInstance:
     - target: {fileID: 519404628894895960, guid: f32a509675643444c822275a731d57fc,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 325.2578
       objectReference: {fileID: 0}
     - target: {fileID: 519404628894895960, guid: f32a509675643444c822275a731d57fc,
         type: 3}
@@ -248,7 +248,7 @@ PrefabInstance:
     - target: {fileID: 645627055352366206, guid: f32a509675643444c822275a731d57fc,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 313.3
       objectReference: {fileID: 0}
     - target: {fileID: 645627055352366206, guid: f32a509675643444c822275a731d57fc,
         type: 3}
@@ -488,7 +488,7 @@ PrefabInstance:
     - target: {fileID: 4919102710944584654, guid: f32a509675643444c822275a731d57fc,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 223.3
       objectReference: {fileID: 0}
     - target: {fileID: 4919102710944584654, guid: f32a509675643444c822275a731d57fc,
         type: 3}
@@ -718,7 +718,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 23
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -803,6 +803,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 50
+  startPos: {x: 0, y: 0, z: 0}
 --- !u!114 &637721690
 MonoBehaviour:
   m_ObjectHideFlags: 0

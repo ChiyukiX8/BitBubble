@@ -8,6 +8,8 @@ public class Cursor : MonoBehaviour
     private GameObject _clickFXPrefab;
     [SerializeField]
     private SFXAudioSource _audioSource;
+    [SerializeField]
+    private Animator _cursorAnimator;
 
     private Bubble _bubbleTarget;
     public void Click()
@@ -32,9 +34,10 @@ public class Cursor : MonoBehaviour
     }
 
     // Setting trust bar as target
-    private void SetTarget(RectTransform rect)
+    public void SetAngry()
     {
-
+        _cursorAnimator.SetTrigger("Angry");
+        gameObject.transform.SetParent(null);
     }
 
     private Vector3 GetRandomLocationInTarget(Bubble bubble)
@@ -56,9 +59,11 @@ public class Cursor : MonoBehaviour
             {
                 yield return WanderBubble(stepDuration, waitTime);
             }
-            else
+            
+            if(_bubbleTarget == null)
             {
-                yield return WanderRect(stepDuration, waitTime);
+                StartCoroutine(WanderAngry(Random.Range(1f, 2f), Random.Range(3f, 5f)));
+                yield break;
             }
         }
     }
@@ -71,14 +76,32 @@ public class Cursor : MonoBehaviour
         {
             transform.position = Vector3.Lerp(transform.position, randomPos, timer / stepDuration);
             yield return new WaitForEndOfFrame();
+            if (_bubbleTarget == null) { yield break; }
             timer += Time.deltaTime;
         }
         // wait time before next
         yield return new WaitForSeconds(waitTime);
     }
 
-    private IEnumerator WanderRect(float stepDuration, float waitTime)
+    private IEnumerator WanderAngry(float stepDuration, float angryDuration)
     {
-        yield return new WaitForSeconds(waitTime);
+        float lifetimeTimer = 0.0f;
+        float stepTimer = 0.0f;
+        Vector3 targetPosition = transform.position + new Vector3(Random.Range(-15f, 15f), Random.Range(-15f, 15f), 0);
+        while (lifetimeTimer < angryDuration)
+        {
+            transform.position = Vector3.Lerp(transform.position, targetPosition, stepTimer / stepDuration);
+            yield return new WaitForEndOfFrame();
+            lifetimeTimer += Time.deltaTime;
+            stepTimer += Time.deltaTime;
+            if(stepTimer > stepDuration)
+            {
+                stepTimer = 0.0f;
+                // Calcualte new random position
+                targetPosition = transform.position + new Vector3(Random.Range(-15f, 15f), Random.Range(-15f, 15f), 0);
+                stepDuration = Mathf.Clamp(stepDuration - 0.2f, 0.5f, 2f);
+            }
+        }
+        Destroy(gameObject);
     }
 }

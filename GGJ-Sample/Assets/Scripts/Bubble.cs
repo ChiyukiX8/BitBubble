@@ -69,6 +69,12 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
         // Invoke event, causes all pixels to get pushed outward from center
         OnBubblePopped?.Invoke(this);
 
+        // Turn all cursors angry
+        foreach(Cursor cursor in spawnedCursors)
+        {
+            cursor.SetAngry();
+        }
+
         Destroy(gameObject);
     }
 
