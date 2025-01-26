@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public enum DrawState { Drawn, Invisible }
 
-public class DrawnPixel : MonoBehaviour
+public class DrawnPixel : MonoBehaviour,IPointerEnterHandler,IPointerDownHandler
 {
     private Image _image;
     private Button _button;
@@ -16,7 +17,6 @@ public class DrawnPixel : MonoBehaviour
     {
         _image = GetComponent<Image>();
         _button = GetComponent<Button>();
-        _button.onClick.AddListener(OnPixelClicked);
 
         _position = position;
         ColorSelector.OnColorChanged.AddListener(SetColor);
@@ -42,6 +42,18 @@ public class DrawnPixel : MonoBehaviour
         }
 
         DrawingZone.OnPixelStateChanged.Invoke(_position, _drawnState);
+    }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if(Input.GetMouseButton(0))
+        {
+            OnPixelClicked();
+        }
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        OnPixelClicked();
     }
 
     public void Draw()
