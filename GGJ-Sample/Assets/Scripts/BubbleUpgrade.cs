@@ -7,6 +7,7 @@ public abstract class BubbleUpgrade
 {
     public string Description => _description;
     public string Name => _name;
+    public int Cost => _cost;
 
     public int Cost => _cost;
 
@@ -28,10 +29,11 @@ public abstract class BubbleUpgrade
     }
     public bool CanPurchase()
     {
-        return true;
+        return CurrencyManager.Instance.Wealth.TotalValue >= _cost;
     }
     public void PurchaseUpgrade(Guid bubbleGuid)
     {
+        _cost = Mathf.RoundToInt(_baseCost * (_purchaseCount * _priceIncreaseMultiplier));
         _purchaseCount++;
     }
     public abstract BubbleUpgrade Copy();
@@ -58,6 +60,7 @@ public class GrowthBubbleUpgrade : BubbleUpgrade
     public override void ApplyUpgrade(Guid bubbleGuid)
     {
         // find bubble via guid, apply this upgrade to the coin data
+
     }
     public override BubbleUpgrade Copy()
     {

@@ -34,11 +34,11 @@ public class BubbleUpgradeMenu : MonoBehaviour
     private Guid _openedBubble;
 
     private const string NEWS_ARTICLE_NAME = "News Article";
-    private const string NEWS_ARTICLE_DESCRIPTION = "Pay a news outlet to run an article about your currency";
+    private const string NEWS_ARTICLE_DESCRIPTION = "Pay a news outlet to run an article about your currency.";
     private const string INFLUENCER_NAME = "Hire Influencer";
-    private const string INFLUENCER_DESCRIPTION = "Pay an influencer to run a social media campaign for your currency";
+    private const string INFLUENCER_DESCRIPTION = "Pay an influencer to run a social media campaign for your currency.";
     private const string POLITICAL_NAME = "Political Endorsement";
-    private const string POLITICAL_DESCRIPTION = "Pay a politician to publicly endourse your currency";
+    private const string POLITICAL_DESCRIPTION = "Pay a politician to publicly endourse your currency.";
 
     private void Awake()
     {
@@ -83,8 +83,8 @@ public class BubbleUpgradeMenu : MonoBehaviour
     private void InitializeUpgradeValues()
     {
         // Idk what these numbers should be just putting incrementally higher ones for now
-        _newsArticleUpgrade = new GrowthBubbleUpgrade(5000, 1.25f, 0.5f, 100, NEWS_ARTICLE_NAME, NEWS_ARTICLE_DESCRIPTION);
-        _influencerUpgrade = new GrowthBubbleUpgrade(25000, 2.5f, 1f, 200, INFLUENCER_NAME, INFLUENCER_DESCRIPTION);
-        _politicalEndorsementUpgrade = new GrowthBubbleUpgrade(100000, 5f, 2f, 300, POLITICAL_NAME, POLITICAL_DESCRIPTION);
+        _newsArticleUpgrade = new GrowthBubbleUpgrade(5000, 1.25f, 1.5f, 100, NEWS_ARTICLE_NAME, NEWS_ARTICLE_DESCRIPTION);
+        _influencerUpgrade = new GrowthBubbleUpgrade(25000, 2.5f, 2.25f, 200, INFLUENCER_NAME, INFLUENCER_DESCRIPTION);
+        _politicalEndorsementUpgrade = new GrowthBubbleUpgrade(100000, 5f, 3.5f, 300, POLITICAL_NAME, POLITICAL_DESCRIPTION);
     }
 }

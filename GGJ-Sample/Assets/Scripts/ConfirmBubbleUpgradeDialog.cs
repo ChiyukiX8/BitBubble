@@ -20,6 +20,10 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
     private Button _cancelButton;
     [SerializeField]
     private ColoredElementThemer _themer;
+    [SerializeField]
+    private TextMeshProUGUI _priceText;
+
+    private BubbleUpgrade _selectedUpgrade;
 
 
     private void Awake()
@@ -37,14 +41,19 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
     {
         _menuContainer.SetActive(true);
 
+        _selectedUpgrade = upgrade;
+
         _upgradeNameText.text = upgrade.Name;
         _descriptionText.text = upgrade.Description;
+        string colorTag = upgrade.CanPurchase() ? "<color=#00FF00>" : "<color=#FF0000>";
+        _priceText.text = $"Costs: {colorTag}${upgrade.Cost}</color>";
+        _confirmButton.interactable = upgrade.CanPurchase();
 
         _themer.SetColorTheme(CurrencyManager.Instance.BubbleConfigLookup(BubbleUpgradeMenu.OpenedBubble).Color);
 
         if(upgrade is GrowthBubbleUpgrade growthUpgrade)
         {
-            _descriptionText.text += $"\nIncreases currency growth by {growthUpgrade.GrowthMagnitude} for {growthUpgrade.Duration} seconds";
+            _descriptionText.text += $"\n\nIncreases currency growth by {growthUpgrade.GrowthMagnitude} for {growthUpgrade.Duration} seconds.";
         }
     }
 
@@ -52,6 +61,11 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
     {
         // Push the upgrade to the bubble stored via guid
         Guid openedbubble = BubbleUpgradeMenu.OpenedBubble;
+
+        if(_selectedUpgrade.CanPurchase())
+        {
+            Debug.Log("UPGRADE PURCHASED");
+        }
 
         _menuContainer.SetActive(false);
 

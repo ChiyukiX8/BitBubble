@@ -13,6 +13,7 @@ public class ColoredImage : ColoredElement
             _image = GetComponent<Image>();
         }
 
-        _image.color = GetAdjustedColor(color);
+        Color adjustedColor = GetAdjustedColor(color);
+        _image.color = new Color(adjustedColor.r, adjustedColor.g, adjustedColor.b, _image.color.a);
     }
 }
