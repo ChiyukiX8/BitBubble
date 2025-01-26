@@ -96,3 +96,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: ee34f5df51b5bf44787f397c9ea5629b, type: 3}
     - {fileID: 8300000, guid: c950e20db02d25147b0e4d5aaced1304, type: 3}
     - {fileID: 8300000, guid: 6feb0562396401943b5e2f839f9dda0d, type: 3}
+  MoneyDepositSFX:
+    _clips:
+    - {fileID: 8300000, guid: 682b43c50936fea4087b8158da0e5b22, type: 3}
+    - {fileID: 8300000, guid: 3e41a92348b7948448b39eec82569687, type: 3}
+    - {fileID: 8300000, guid: bd9dd85e98ebc344a92ba017695b0631, type: 3}

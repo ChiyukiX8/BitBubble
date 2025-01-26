@@ -22,6 +22,7 @@ public class AudioClips : MonoBehaviour
     public AudioClipGroup ClickSFX;
 
     public AudioClipGroupLinear MoneyAddSFX;
+    public AudioClipGroup MoneyDepositSFX;
 
     public static AudioClipGroup GetClipGroupByUpgrade(string name)
     {

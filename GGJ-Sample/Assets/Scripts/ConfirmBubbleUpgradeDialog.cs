@@ -88,8 +88,10 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
             // Selected upgrade is null, for now only case of this is popping.
             // Add new internal state tracking in future if we need more cases
             BubbleUpgradeMenu.Instance.Close();
-            // idc anymore just use gameobject.find :'(
-            CurrencyManager.Instance.BubbleLookup(openedbubble).Pop();
+            Bubble bubble = CurrencyManager.Instance.BubbleLookup(openedbubble);
+            CoinData coinData = CurrencyManager.Instance.CurrentBubbles[openedbubble];
+            GameplayCanvas.Instance.InitiateMoneyTransfer(bubble, coinData.Value);
+            bubble.Pop();
 
             GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.PopBubbleSFX, 0.5f);
             // Reach out to currency manager and give us money for the pop, and call other popping logic
