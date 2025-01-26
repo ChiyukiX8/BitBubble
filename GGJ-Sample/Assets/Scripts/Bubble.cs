@@ -132,6 +132,7 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
     {
         if (config.Id.Equals(data.Id))
         {
+            // Update radius once coin has increased $100
             radAccum += data.UpgradeSum();
             if (radAccum > 100)
             {
