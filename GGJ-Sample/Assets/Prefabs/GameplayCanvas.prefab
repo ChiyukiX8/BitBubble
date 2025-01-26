@@ -120,7 +120,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _topShelf: {fileID: 2045014065711521924}
-  _topShelfLayoutRebuilder: {fileID: 2308926706400558170}
 --- !u!1 &2191219417047620764
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,7 +497,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 15, y: -22.5}
-  m_SizeDelta: {x: 0, y: 75}
+  m_SizeDelta: {x: 313.3, y: 75}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5871683394383990069
 CanvasRenderer:
@@ -561,6 +560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 3769733614216208600}
+  _rebuilder: {fileID: 2308926706400558170}
 --- !u!1 &4408242952337954495
 GameObject:
   m_ObjectHideFlags: 0
@@ -823,7 +823,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 378.3, y: -22.5}
-  m_SizeDelta: {x: 0, y: 75}
+  m_SizeDelta: {x: 325.2578, y: 75}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &7474957649884940084
 CanvasRenderer:

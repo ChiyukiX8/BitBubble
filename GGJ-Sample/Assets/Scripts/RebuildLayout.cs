@@ -5,29 +5,37 @@ using UnityEngine.UI;
 
 public class RebuildLayout : MonoBehaviour
 {
-    public bool Setup => _setup;
-    private LayoutGroup[] _layoutGroups;
-
-    private bool _setup = false;
+    private List<RectTransform> _rects = new List<RectTransform>();
 
     private void Start()
     {
         Rebuild();
-        _setup = true;
     }
 
     public void Rebuild()
     {
-        if(_layoutGroups == null || _layoutGroups.Length == 0)
+        if (_rects == null || _rects.Count == 0)
         {
-            _layoutGroups = GetComponentsInChildren<LayoutGroup>(true);
-        }
-        if(_setup)
-        {
-            foreach (LayoutGroup group in _layoutGroups)
+            foreach (LayoutGroup layout in GetComponentsInChildren<LayoutGroup>(true))
             {
-                LayoutRebuilder.ForceRebuildLayoutImmediate(group.gameObject.transform as RectTransform);
+                RectTransform rect = layout.transform as RectTransform;
+                if (_rects.Contains(rect) == false)
+                {
+                    _rects.Add(rect);
+                }
             }
+            foreach (ContentSizeFitter sizeFitter in GetComponentsInChildren<ContentSizeFitter>(true))
+            {
+                RectTransform rect = sizeFitter.gameObject.transform as RectTransform;
+                if (_rects.Contains(rect) == false)
+                {
+                    _rects.Add(rect);
+                }
+            }
+        }
+        foreach (RectTransform rect in _rects)
+        {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(rect);
         }
     }
 }

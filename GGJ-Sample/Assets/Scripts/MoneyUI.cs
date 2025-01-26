@@ -8,6 +8,12 @@ public class MoneyUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _text;
 
+    [SerializeField]
+    private RebuildLayout _rebuilder;
+
+    private List<RectTransform> rects = new List<RectTransform>();
+    private string _previousText = "";
+
     private void Start()
     {
         SetMoneyValue(Mathf.RoundToInt(CurrencyManager.Instance.Wealth.TotalValue));
@@ -26,6 +32,15 @@ public class MoneyUI : MonoBehaviour
         AppEvents.OnWealthUpdate.OnTrigger -= OnWealthUpdated;
     }
 
+    private void Update()
+    {
+        if(_previousText != _text.text)
+        {
+            Rebuild();
+            _previousText = _text.text;
+        }
+    }
+
     private void OnWealthUpdated(WealthData data)
     {
         SetMoneyValue(Mathf.RoundToInt(data.TotalValue));
@@ -34,5 +49,10 @@ public class MoneyUI : MonoBehaviour
     private void SetMoneyValue(int value)
     {
         _text.text = value.ToString();
+    }
+
+    private void Rebuild()
+    {
+        _rebuilder.Rebuild();
     }
 }
