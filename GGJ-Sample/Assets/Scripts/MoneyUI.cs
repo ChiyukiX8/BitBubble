@@ -7,6 +7,10 @@ public class MoneyUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _text;
 
+    private void Start()
+    {
+        SetMoneyValue(Mathf.RoundToInt(CurrencyManager.Instance.Wealth.TotalValue));
+    }
     private void OnEnable()
     {
         // make text set based on currency manager event
