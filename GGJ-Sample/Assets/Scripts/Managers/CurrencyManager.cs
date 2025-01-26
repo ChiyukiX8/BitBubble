@@ -8,7 +8,7 @@ public class CurrencyManager : PersistentMonoSingleton<CurrencyManager>
     private GameManager _gameManager;
 
     private Timer _coinUpdateTimer;
-    public WealthData Wealth = new WealthData(10000.0f);
+    public WealthData Wealth = new WealthData(100000.0f);
 
 
     public Dictionary<Guid,CoinData> CurrentBubbles = new Dictionary<Guid, CoinData>();
@@ -26,22 +26,12 @@ public class CurrencyManager : PersistentMonoSingleton<CurrencyManager>
         }
 
         AppEvents.OnWealthUpdate.Trigger(Wealth);
-
-        _coinUpdateTimer = Timer.Register(1.0f, UpdateCoins, isLooped:true);
     }
 
     void OnDestroy()
     {
         AppEvents.OnCoinCreation.OnTrigger -= CreateNewCoin;
         AppEvents.OnBubblePop.OnTrigger -= BubblePopped;
-    }
-
-    void UpdateCoins()
-    {
-        foreach (var coin in CurrentBubbles)
-        {
-            coin.Value.UpdateValue();
-        }
     }
 
     public void CreateNewCoin(BubbleCreationConfig newConfig)

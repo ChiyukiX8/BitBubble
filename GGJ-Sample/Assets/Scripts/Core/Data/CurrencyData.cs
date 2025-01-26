@@ -1,8 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+using UnityTimer;
 
 public class CoinData
 {
@@ -19,6 +18,8 @@ public class CoinData
     private float _rateOfChange = 1.0f;
     public float Rate {get {return _rateOfChange;}}
 
+    private Timer _timer;
+
     public List<GrowthBubbleUpgrade> Upgrades = new List<GrowthBubbleUpgrade>();
 
     public CoinData(BubbleCreationConfig config)
@@ -26,6 +27,8 @@ public class CoinData
         Id = config.Id;
         Name = config.Name;
         Value = config.InitialValue;
+
+        StartTimer();
     }
 
     public CoinData(CoinData copy)
@@ -35,18 +38,33 @@ public class CoinData
         _value = copy._value;
         _initialInvestment = copy._initialInvestment;
         _rateOfChange = copy._rateOfChange;
+        
+        StartTimer();
+    }
+
+    private void StartTimer()
+    {
+        _timer = Timer.Register(1/_rateOfChange, UpdateValue, isLooped:true);
+    }
+
+    private void UpdateTimer()
+    {
+        _timer.Cancel();
+        //_timer = null;
+        StartTimer();
     }
 
     public void UpdateValue()
     {
-        _value += (_rateOfChange + UpgradeSum());
+        _value += 1.0f;
         AppEvents.OnCoinUpdate.Trigger(this);
     }
 
     public void AddUpgrade(GrowthBubbleUpgrade newUpgrade)
     {
         Upgrades.Add(newUpgrade);
-        _rateOfChange += newUpgrade.GrowthMagnitude;
+        _rateOfChange = UpgradeSum();
+        UpdateTimer();
     }
 
     public void RemoveUpgrade()
