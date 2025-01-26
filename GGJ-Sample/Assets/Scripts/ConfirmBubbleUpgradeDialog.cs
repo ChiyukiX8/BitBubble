@@ -37,6 +37,23 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
 
     }
 
+    public void DrawPopDialog(string title, string description)
+    {
+        _menuContainer.SetActive(true);
+
+        _selectedUpgrade = null;
+        _upgradeNameText.text = title;
+        _descriptionText.text = description;
+        _themer.SetColorTheme(CurrencyManager.Instance.BubbleConfigLookup(BubbleUpgradeMenu.OpenedBubble).Color);
+        AppEvents.OnCoinUpdate.OnTrigger += UpdatePriceText;
+        UpdatePriceText(null);
+    }
+
+    private void UpdatePriceText(CoinData data)
+    {
+        _priceText.text = $"<color=#4ACC68>+${CurrencyManager.Instance.CurrentBubbles[BubbleUpgradeMenu.OpenedBubble].Value}</color>";
+    }
+
     public void DrawDialog(BubbleUpgrade upgrade)
     {
         _menuContainer.SetActive(true);
@@ -45,7 +62,7 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
 
         _upgradeNameText.text = upgrade.Name;
         _descriptionText.text = upgrade.Description;
-        string colorTag = upgrade.CanPurchase() ? "<color=#00FF00>" : "<color=#FF0000>";
+        string colorTag = upgrade.CanPurchase() ? "<color=#4ACC68>" : "<color=#CC4A4A>";
         _priceText.text = $"Costs: {colorTag}${upgrade.Cost}</color>";
         _confirmButton.interactable = upgrade.CanPurchase();
 
@@ -62,17 +79,33 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
         // Push the upgrade to the bubble stored via guid
         Guid openedbubble = BubbleUpgradeMenu.OpenedBubble;
 
-        if(_selectedUpgrade.CanPurchase())
+        if(_selectedUpgrade == null)
         {
-            Debug.Log("UPGRADE PURCHASED");
-            CurrencyManager.Instance.PurchaseUpgrade(openedbubble, _selectedUpgrade);
+            // Selected upgrade is null, for now only case of this is popping.
+            // Add new internal state tracking in future if we need more cases
+            BubbleUpgradeMenu.Instance.Close();
+            // idc anymore just use gameobject.find :'(
+            CurrencyManager.Instance.BubbleLookup(openedbubble).Pop();
+
+            // Reach out to currency manager and give us money for the pop, and call other popping logic
+        }
+        else
+        {
+            if (_selectedUpgrade.CanPurchase())
+            {
+                Debug.Log("UPGRADE PURCHASED");
+                CurrencyManager.Instance.PurchaseUpgrade(openedbubble, _selectedUpgrade);
+            }
         }
 
+
         _menuContainer.SetActive(false);
+        AppEvents.OnCoinUpdate.OnTrigger -= UpdatePriceText;
 
     }
     private void OnDialogCancelled()
     {
         _menuContainer.SetActive(false);
+        AppEvents.OnCoinUpdate.OnTrigger -= UpdatePriceText;
     }
 }

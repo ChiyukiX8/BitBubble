@@ -234,11 +234,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _menuContainer: {fileID: 4794627438146060737}
   _bubbleNameText: {fileID: 1864787599494886636}
+  _bubbleValueText: {fileID: 5765393917657075115}
+  _bubbleGrowthText: {fileID: 4230294169079397950}
   _collapseButton: {fileID: 6868188793843711436}
   _themer: {fileID: 6425350454250603309}
   _newsArticleButton: {fileID: 8059489405113760054}
   _influencerButton: {fileID: 7804266872106596859}
   _politicalEndorsementButton: {fileID: 7124002172953135656}
+  _popBubbleButton: {fileID: 1535129092155478432}
 --- !u!1 &3908058942873862782
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,7 +467,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 15, y: -22.5}
-  m_SizeDelta: {x: 313.3, y: 75}
+  m_SizeDelta: {x: 0, y: 75}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5871683394383990069
 CanvasRenderer:
@@ -789,7 +792,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 378.3, y: -22.5}
-  m_SizeDelta: {x: 325.2578, y: 75}
+  m_SizeDelta: {x: 0, y: 75}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &7474957649884940084
 CanvasRenderer:
@@ -1119,9 +1122,29 @@ PrefabInstance:
     - target: {fileID: 1949853884144568345, guid: 65512833f5bcdef41aa4f5ae5c165e7a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 263.33334
+      value: 256.42838
       objectReference: {fileID: 0}
     - target: {fileID: 1949853884144568345, guid: 65512833f5bcdef41aa4f5ae5c165e7a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -51.249603
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339014641797214081, guid: 65512833f5bcdef41aa4f5ae5c165e7a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339014641797214081, guid: 65512833f5bcdef41aa4f5ae5c165e7a,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339014641797214081, guid: 65512833f5bcdef41aa4f5ae5c165e7a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 356.99973
+      objectReference: {fileID: 0}
+    - target: {fileID: 2339014641797214081, guid: 65512833f5bcdef41aa4f5ae5c165e7a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -51.249603
@@ -1155,11 +1178,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2591131346502481893, guid: 65512833f5bcdef41aa4f5ae5c165e7a,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 340
       objectReference: {fileID: 0}
     - target: {fileID: 2591131346502481893, guid: 65512833f5bcdef41aa4f5ae5c165e7a,
         type: 3}
@@ -1224,7 +1242,7 @@ PrefabInstance:
     - target: {fileID: 2591131346502481893, guid: 65512833f5bcdef41aa4f5ae5c165e7a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -10
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 2591131346502481893, guid: 65512833f5bcdef41aa4f5ae5c165e7a,
         type: 3}
@@ -1254,7 +1272,7 @@ PrefabInstance:
     - target: {fileID: 2769551619989475212, guid: 65512833f5bcdef41aa4f5ae5c165e7a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 160
+      value: 155.85703
       objectReference: {fileID: 0}
     - target: {fileID: 2769551619989475212, guid: 65512833f5bcdef41aa4f5ae5c165e7a,
         type: 3}
@@ -1284,7 +1302,7 @@ PrefabInstance:
     - target: {fileID: 7762714944778787182, guid: 65512833f5bcdef41aa4f5ae5c165e7a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 56.666668
+      value: 55.285675
       objectReference: {fileID: 0}
     - target: {fileID: 7762714944778787182, guid: 65512833f5bcdef41aa4f5ae5c165e7a,
         type: 3}
@@ -1296,6 +1314,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65512833f5bcdef41aa4f5ae5c165e7a, type: 3}
+--- !u!114 &1535129092155478432 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 299194492704962572, guid: 65512833f5bcdef41aa4f5ae5c165e7a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1255145337482717612}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1864787599494886636 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 615342205922909504, guid: 65512833f5bcdef41aa4f5ae5c165e7a,
@@ -1314,12 +1344,36 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1255145337482717612}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4230294169079397950 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3161010352452736914, guid: 65512833f5bcdef41aa4f5ae5c165e7a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1255145337482717612}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4794627438146060737 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6044635853008709741, guid: 65512833f5bcdef41aa4f5ae5c165e7a,
     type: 3}
   m_PrefabInstance: {fileID: 1255145337482717612}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5765393917657075115 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4713552678532211719, guid: 65512833f5bcdef41aa4f5ae5c165e7a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1255145337482717612}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6425350454250603309 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5206233982779632257, guid: 65512833f5bcdef41aa4f5ae5c165e7a,
