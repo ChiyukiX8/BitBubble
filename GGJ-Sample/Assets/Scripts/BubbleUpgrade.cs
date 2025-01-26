@@ -9,8 +9,6 @@ public abstract class BubbleUpgrade
     public string Name => _name;
     public int Cost => _cost;
 
-    public int Cost => _cost;
-
     protected int _baseCost;
     protected int _purchaseCount;
     protected float _priceIncreaseMultiplier;
