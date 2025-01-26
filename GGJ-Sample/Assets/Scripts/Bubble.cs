@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public class Bubble : MonoBehaviour, IPointerDownHandler
 {
-    public int Radius => radius;
+    public float Radius => radius;
 
     [Header("References")]
     [SerializeField]
@@ -23,7 +23,7 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
 
     public BubbleCreationConfig config;
     private float iconSizeFunction => (1f / 16f) * radius;
-    private int radius = 10;
+    private float radius = 10.0f;
     private CircleCollider2D bubbleCollider;
 
     private Color iconColor => config.Color;
@@ -37,6 +37,13 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
         // Determine radius from config.InitialValue
         DrawBubble(radius);
         DrawIcon(_config.Icon);
+
+        AppEvents.OnCoinUpdate.OnTrigger += OnCoinUpdated;
+    }
+
+    private void OnDestroy()
+    {
+        AppEvents.OnCoinUpdate.OnTrigger -= OnCoinUpdated;
     }
 
     private void Update()
@@ -56,7 +63,7 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
         }
     }
 
-    private void DrawBubble(int radius)
+    private void DrawBubble(float radius)
     {
         if (radius == 0) return;
 
@@ -68,9 +75,9 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
         drawnBubblePixels.Clear();
 
         // Copied from ChatGPT ;)
-        for (int x = -radius; x <= radius; x++)
+        for (float x = -radius; x <= radius; x++)
         {
-            for (int y = -radius; y <= radius; y++)
+            for (float y = -radius; y <= radius; y++)
             {
                 if (Mathf.RoundToInt(Mathf.Sqrt(x * x + y * y)) == radius)
                 {
@@ -106,7 +113,7 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
         iconScalePivot.localScale = new Vector3(iconSizeFunction, iconSizeFunction, 1);
     }
 
-    private void SpawnPixel(GameObject prefab, Transform parent, int x, int y, Color color, ref List<GameObject> collection, int order = 0)
+    private void SpawnPixel(GameObject prefab, Transform parent, float x, float y, Color color, ref List<GameObject> collection, int order = 0)
     {
         Vector3 spawnPosition = new Vector3(x, y, 0);
         GameObject spawnedPixel = Instantiate(prefab, parent);
@@ -116,6 +123,16 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
         sprite.color = color;
         spawnedPixel.name = $"({spawnedPixel.transform.position.x},{spawnedPixel.transform.position.y}";
         collection.Add(spawnedPixel);
+    }
+
+    private void OnCoinUpdated(CoinData data)
+    {
+        if (config.Id.Equals(data.Id))
+        {
+            radius += 1/data.Rate;
+            DrawBubble(radius);
+            DrawIcon(config.Icon);
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
