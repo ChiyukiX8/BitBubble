@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Bubble : MonoBehaviour
+public class Bubble : MonoBehaviour, IPointerDownHandler
 {
     [Header("References")]
     [SerializeField]
@@ -21,6 +22,7 @@ public class Bubble : MonoBehaviour
     public BubbleCreationConfig config;
     private float iconSizeFunction => (1f / 16f) * radius;
     private int radius = 10;
+    private CircleCollider2D bubbleCollider;
 
     private Color iconColor => config.Color;
     private Color bubbleColor => Color.Lerp(config.Color, Color.white, 0.5f);
@@ -28,6 +30,7 @@ public class Bubble : MonoBehaviour
 
     public void Setup(BubbleCreationConfig _config)
     {
+        bubbleCollider = GetComponent<CircleCollider2D>();
         config = new BubbleCreationConfig(_config);
         // Determine radius from config.InitialValue
         DrawBubble(radius);
@@ -85,6 +88,8 @@ public class Bubble : MonoBehaviour
                 }
             }
         }
+
+        bubbleCollider.radius = radius;
     }
 
     private void DrawIcon(HashSet<Vector2Int> iconInfo)
@@ -109,5 +114,12 @@ public class Bubble : MonoBehaviour
         sprite.color = color;
         spawnedPixel.name = $"({spawnedPixel.transform.position.x},{spawnedPixel.transform.position.y}";
         collection.Add(spawnedPixel);
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        BubbleUpgradeMenu.Instance.OpenBubbleMenu(config.Id);
+        
+        // Have camera pan/zoom to bubble
     }
 }

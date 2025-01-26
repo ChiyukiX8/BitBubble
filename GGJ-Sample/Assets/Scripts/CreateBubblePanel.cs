@@ -125,7 +125,6 @@ public class CreateBubblePanel : MonoBehaviour
 
     private void OnConfirmButtonClicked()
     {
-
         if(Valid())
         {
             _currentConfig.Id = Guid.NewGuid();

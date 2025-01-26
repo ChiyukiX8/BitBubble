@@ -9,7 +9,8 @@ public class MoneyUI : MonoBehaviour
 
     private void Awake()
     {
-        // make text set based on game manager action
+        // make text set based on currency manager event
+
     }
 
     private void SetMoneyValue(int value)

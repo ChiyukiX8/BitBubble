@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 529821113257611408}
   - component: {fileID: 2197351177784374375}
   - component: {fileID: 4321163636327933120}
+  - component: {fileID: 7986926506661425625}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -122,6 +123,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.2
+--- !u!114 &7986926506661425625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5326827412039681002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cad2dde8986dd9479bb327320cccf41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BaseValue: 0.9
 --- !u!1 &5605607055658508456
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,6 +147,7 @@ GameObject:
   - component: {fileID: 3699601172871652980}
   - component: {fileID: 2458867806488211557}
   - component: {fileID: 7239033315546065182}
+  - component: {fileID: 2525132490958577350}
   m_Layer: 5
   m_Name: Bevel
   m_TagString: Untagged
@@ -197,6 +212,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.2
+--- !u!114 &2525132490958577350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5605607055658508456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cad2dde8986dd9479bb327320cccf41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BaseValue: 1
 --- !u!1 &8440575989401972077
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,6 +236,7 @@ GameObject:
   - component: {fileID: 6801105998887696516}
   - component: {fileID: 5021296453273810632}
   - component: {fileID: 2052911068319520318}
+  - component: {fileID: 2727061014835087425}
   m_Layer: 5
   m_Name: Frame
   m_TagString: Untagged
@@ -272,6 +301,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.2
+--- !u!114 &2727061014835087425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8440575989401972077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cad2dde8986dd9479bb327320cccf41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BaseValue: 0.8
 --- !u!1 &9156457898853378882
 GameObject:
   m_ObjectHideFlags: 0
