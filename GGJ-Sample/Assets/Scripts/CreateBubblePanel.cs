@@ -108,8 +108,7 @@ public class CreateBubblePanel : MonoBehaviour
 
     private void SetValue(float value)
     {
-        // Reach out to GameManager and set value to (value / GameManager.Money); replace 1000000 with current money value
-        _currentConfig.InitialValue = Mathf.RoundToInt((value / 1.0f) * 10000f);
+        _currentConfig.InitialValue = Mathf.RoundToInt(value * CurrencyManager.Instance.Wealth.TotalValue);
         _valueText.text = _currentConfig.InitialValue.ToString();
     }
 

@@ -34,11 +34,11 @@ public class BubbleUpgradeMenu : MonoBehaviour
     private Guid _openedBubble;
 
     private const string NEWS_ARTICLE_NAME = "News Article";
-    private const string NEWS_ARTICLE_DESCRIPTION = "Pay a news outlet to run an article about your currency";
+    private const string NEWS_ARTICLE_DESCRIPTION = "Pay a news outlet to run an article about your currency.";
     private const string INFLUENCER_NAME = "Hire Influencer";
-    private const string INFLUENCER_DESCRIPTION = "Pay an influencer to run a social media campaign for your currency";
+    private const string INFLUENCER_DESCRIPTION = "Pay an influencer to run a social media campaign for your currency.";
     private const string POLITICAL_NAME = "Political Endorsement";
-    private const string POLITICAL_DESCRIPTION = "Pay a politician to publicly endourse your currency";
+    private const string POLITICAL_DESCRIPTION = "Pay a politician to publicly endourse your currency.";
 
     private void Awake()
     {

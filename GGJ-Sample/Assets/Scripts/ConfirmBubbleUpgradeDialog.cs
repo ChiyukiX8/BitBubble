@@ -53,7 +53,7 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
 
         if(upgrade is GrowthBubbleUpgrade growthUpgrade)
         {
-            _descriptionText.text += $"\nIncreases currency growth by {growthUpgrade.GrowthMagnitude} for {growthUpgrade.Duration} seconds";
+            _descriptionText.text += $"\n\nIncreases currency growth by {growthUpgrade.GrowthMagnitude} for {growthUpgrade.Duration} seconds.";
         }
     }
 
