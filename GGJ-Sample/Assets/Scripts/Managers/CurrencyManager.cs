@@ -45,6 +45,20 @@ public class CurrencyManager : PersistentMonoSingleton<CurrencyManager>
         
     }
 
+    public BubbleCreationConfig BubbleConfigLookup(Guid id)
+    {
+        var bubbles = GameObject.FindObjectsByType<Bubble>(FindObjectsSortMode.None);
+        foreach (Bubble bubble in bubbles)
+        {
+            if (bubble.config.Id == id)
+            {
+                return bubble.config;
+            }
+        }
+        // Bubble not found
+        return null;
+    }
+
     public void BubblePopped(Guid coinId)
     {
         Wealth.TotalValue += CurrentBubbles[coinId].Value;

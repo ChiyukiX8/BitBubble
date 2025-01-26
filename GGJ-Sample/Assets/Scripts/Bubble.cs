@@ -18,7 +18,7 @@ public class Bubble : MonoBehaviour
     private List<GameObject> drawnBubblePixels = new List<GameObject>();
     private List<GameObject> drawnIconPixels = new List<GameObject>();
 
-    private BubbleCreationConfig config;
+    public BubbleCreationConfig config;
     private float iconSizeFunction => (1f / 16f) * radius;
     private int radius = 10;
 
