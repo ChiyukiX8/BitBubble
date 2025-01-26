@@ -120,6 +120,6 @@ public class UIMenuAnimationController : MonoBehaviour
 
     private Vector3 GetOffScreenPosition()
     {
-        return _originalPosition - new Vector3(0, direction == EnterDirection.Up ? Screen.height : -Screen.height, 0);
+        return _originalPosition - new Vector3(0, direction == EnterDirection.Up ? GameplayCanvas.Scaler.referenceResolution.y : -GameplayCanvas.Scaler.referenceResolution.y, 0);
     }
 }

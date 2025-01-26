@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class GameplayCanvas : MonoBehaviour
 {
     public static GameplayCanvas Instance;
+    public static CanvasScaler Scaler => Instance._scaler;
+
     [SerializeField]
     private UIMenuAnimationController _topShelf;
     [SerializeField]
@@ -16,6 +18,8 @@ public class GameplayCanvas : MonoBehaviour
     private RectTransform _animatedIconsContainer;
     [SerializeField]
     private Button _closeGameButton;
+    [SerializeField]
+    private CanvasScaler _scaler;
 
     private void Awake()
     {

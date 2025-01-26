@@ -313,6 +313,7 @@ MonoBehaviour:
   _moneyRect: {fileID: 1876739534977529102}
   _animatedIconsContainer: {fileID: 5940079834767200529}
   _closeGameButton: {fileID: 8155982829329207940}
+  _scaler: {fileID: 2492312051865825010}
 --- !u!1 &2191219417047620764
 GameObject:
   m_ObjectHideFlags: 0
@@ -766,7 +767,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 15, y: -22.5}
-  m_SizeDelta: {x: 313.3, y: 75}
+  m_SizeDelta: {x: 0, y: 75}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5871683394383990069
 CanvasRenderer:
@@ -1211,7 +1212,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 378.3, y: -22.5}
-  m_SizeDelta: {x: 325.2578, y: 75}
+  m_SizeDelta: {x: 0, y: 75}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &7474957649884940084
 CanvasRenderer:
