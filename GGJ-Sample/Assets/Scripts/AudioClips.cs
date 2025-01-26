@@ -18,7 +18,7 @@ public class AudioClips : MonoBehaviour
     public AudioClipGroup SelectCancelSFX;
     public AudioClipGroup SelectSFX;
 
-    public AudioClipGroupLinear MoneySpendSFX;
+    public AudioClipGroupLinear MoneyAddSFX;
 
     public static AudioClipGroup GetClipGroupByUpgrade(string name)
     {
@@ -33,6 +33,13 @@ public class AudioClips : MonoBehaviour
                 return Instance.BubbleUpgradePresidentialSFX;
         }
     }
+
+    public static float ConvertWealthValueToLinear(int value)
+    {
+        // value of 100000 plays most intense money sound, 0 plays least.
+        return Mathf.Lerp(0.0f, 1.0f, value / Constants.MAX_VALUE_SFX);
+    }
+
     private void Awake()
     {
         if(Instance == null)

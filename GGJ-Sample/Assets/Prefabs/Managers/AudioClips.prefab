@@ -78,5 +78,11 @@ MonoBehaviour:
     _clips:
     - {fileID: 8300000, guid: 42fc9be19aa8f884ba9581ea87a2cfbe, type: 3}
     - {fileID: 8300000, guid: 15bd1ddf4cbd45e42b13d0dca5db1b25, type: 3}
-  MoneySpendSFX:
-    _clips: []
+  MoneyAddSFX:
+    _clips:
+    - {fileID: 8300000, guid: 2acb2395b8415334a9a68f901f820eea, type: 3}
+    - {fileID: 8300000, guid: e693232082ffe5c4abe6df9071eeb660, type: 3}
+    - {fileID: 8300000, guid: 7e0583dc1fc424b4e8a099de22817490, type: 3}
+    - {fileID: 8300000, guid: 7f38bf61356e64e48b12076260878512, type: 3}
+    - {fileID: 8300000, guid: 0c5471449bad8b4468b7404e06604697, type: 3}
+    - {fileID: 8300000, guid: ee34f5df51b5bf44787f397c9ea5629b, type: 3}

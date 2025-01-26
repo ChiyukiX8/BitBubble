@@ -79,7 +79,9 @@ public class CurrencyManager : PersistentMonoSingleton<CurrencyManager>
 
     public void BubblePopped(Guid coinId)
     {
-        Wealth.TotalValue += CurrentBubbles[coinId].Value;
+        float value = CurrentBubbles[coinId].Value;
+        Wealth.TotalValue += value;
+        GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.MoneyAddSFX, 1.0f, AudioClips.ConvertWealthValueToLinear(Mathf.RoundToInt(value)));
         TrustManager.Instance.OnBubblePopped(coinId);
         CurrentBubbles.Remove(coinId);
     }

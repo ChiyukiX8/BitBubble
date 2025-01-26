@@ -15,4 +15,5 @@ public static class Constants
     public const string VALUE_PREFIX = "Value: ";
 
     public const float UI_SFX_VOLUME_MODIFER = 0.1f;
+    public const float MAX_VALUE_SFX = 100000.0f;
 }
