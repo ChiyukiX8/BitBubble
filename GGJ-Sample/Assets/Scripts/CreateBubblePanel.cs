@@ -62,8 +62,22 @@ public class CreateBubblePanel : MonoBehaviour
 
     public void CreateBubble(BubbleCreationConfig config)
     {
+        Vector3 spawnPosition = new Vector3(0.01f, 0, 0);
+        // Try to spawn bubble in center of screen, if a bubble exists here...
+        // Pick a random angle around that bubble and spawn this bubble the combined radius distance away
+        Ray ray = new Ray(new Vector3(0, 0, -1), new Vector3(0, 0, 1));
+        RaycastHit2D hit = Physics2D.GetRayIntersection(ray, 10);
+        if (hit.collider != null)
+        {
+            spawnPosition = hit.collider.transform.position + new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), 0);
+            spawnPosition.Normalize();
+            spawnPosition *= hit.collider.gameObject.GetComponent<Bubble>().Radius + 10f + 2f;
+            spawnPosition.z = 0;
+        }
+
         // Probably want to reach out to game manager to get a parent we can put the bubbles under
-        GameObject spawnedBubble = Instantiate(_bubblePrefab, null);
+        GameObject spawnedBubble = Instantiate(_bubblePrefab, spawnPosition, Quaternion.identity, null);
+
         spawnedBubble.GetComponent<Bubble>().Setup(config);
     }
 

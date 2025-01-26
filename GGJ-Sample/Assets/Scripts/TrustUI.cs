@@ -16,6 +16,11 @@ public class TrustUI : MonoBehaviour
     [SerializeField]
     private Gradient _gradient;
 
+    private void OnEnable()
+    {
+        LayoutRebuilder.ForceRebuildLayoutImmediate(transform as RectTransform);
+    }
+
     private void Awake()
     {
         AppEvents.OnTrustUpdate.OnTrigger += TrustUpdated;

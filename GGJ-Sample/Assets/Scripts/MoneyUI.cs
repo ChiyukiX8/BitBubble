@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 public class MoneyUI : MonoBehaviour
 {
     [SerializeField]
@@ -11,8 +12,11 @@ public class MoneyUI : MonoBehaviour
     {
         SetMoneyValue(Mathf.RoundToInt(CurrencyManager.Instance.Wealth.TotalValue));
     }
+
     private void OnEnable()
     {
+        LayoutRebuilder.ForceRebuildLayoutImmediate(transform as RectTransform);
+
         // make text set based on currency manager event
         AppEvents.OnWealthUpdate.OnTrigger += OnWealthUpdated;
     }

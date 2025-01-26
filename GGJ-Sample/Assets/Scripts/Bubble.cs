@@ -4,6 +4,8 @@ using UnityEngine.EventSystems;
 
 public class Bubble : MonoBehaviour, IPointerDownHandler
 {
+    public int Radius => radius;
+
     [Header("References")]
     [SerializeField]
     private GameObject pixelPrefab;
@@ -89,7 +91,7 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
             }
         }
 
-        bubbleCollider.radius = radius;
+        bubbleCollider.radius = radius + 2f;
     }
 
     private void DrawIcon(HashSet<Vector2Int> iconInfo)
