@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public class Bubble : MonoBehaviour, IPointerDownHandler
 {
-    public float Radius => radius;
+    public int Radius => radius;
 
     [Header("References")]
     [SerializeField]
@@ -23,7 +23,8 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
 
     public BubbleCreationConfig config;
     private float iconSizeFunction => (1f / 16f) * radius;
-    private float radius = 10.0f;
+    private int radius = 10;
+    private float radAccum;
     private CircleCollider2D bubbleCollider;
 
     private Color iconColor => config.Color;
@@ -63,7 +64,7 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
         }
     }
 
-    private void DrawBubble(float radius)
+    private void DrawBubble(int radius)
     {
         if (radius == 0) return;
 
@@ -75,9 +76,9 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
         drawnBubblePixels.Clear();
 
         // Copied from ChatGPT ;)
-        for (float x = -radius; x <= radius; x++)
+        for (int x = -radius; x <= radius; x++)
         {
-            for (float y = -radius; y <= radius; y++)
+            for (int y = -radius; y <= radius; y++)
             {
                 if (Mathf.RoundToInt(Mathf.Sqrt(x * x + y * y)) == radius)
                 {
@@ -113,7 +114,7 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
         iconScalePivot.localScale = new Vector3(iconSizeFunction, iconSizeFunction, 1);
     }
 
-    private void SpawnPixel(GameObject prefab, Transform parent, float x, float y, Color color, ref List<GameObject> collection, int order = 0)
+    private void SpawnPixel(GameObject prefab, Transform parent, int x, int y, Color color, ref List<GameObject> collection, int order = 0)
     {
         Vector3 spawnPosition = new Vector3(x, y, 0);
         GameObject spawnedPixel = Instantiate(prefab, parent);
@@ -129,9 +130,14 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
     {
         if (config.Id.Equals(data.Id))
         {
-            radius += 1/data.Rate;
-            DrawBubble(radius);
-            DrawIcon(config.Icon);
+            radAccum += data.UpgradeSum();
+            if (radAccum > 100)
+            {
+                radAccum = 0.0f;
+                radius += 1;
+                DrawBubble(radius);
+                DrawIcon(config.Icon);
+            }
         }
     }
 
@@ -140,5 +146,6 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
         BubbleUpgradeMenu.Instance.OpenBubbleMenu(config.Id);
         
         // Have camera pan/zoom to bubble
+        AppEvents.OnBubbleClick.Trigger(config.Id);
     }
 }
