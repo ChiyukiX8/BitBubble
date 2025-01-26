@@ -34,6 +34,7 @@ public class TrustUI : MonoBehaviour
     private void TrustUpdated(TrustData data)
     {
         SetTrustValue(data.TotalValue);
+        Debug.Log($"Trust: {data.TotalValue}");
     }
 
     private void SetTrustValue(float value)
