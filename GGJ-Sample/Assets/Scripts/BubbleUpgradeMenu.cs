@@ -109,7 +109,7 @@ public class BubbleUpgradeMenu : MonoBehaviour
     private void InitializeUpgradeValues()
     {
         // Idk what these numbers should be just putting incrementally higher ones for now
-        _newsArticleUpgrade = new GrowthBubbleUpgrade(5000, 1.25f, 1.5f, 10, Constants.NEWS_ARTICLE_NAME, Constants.NEWS_ARTICLE_DESCRIPTION);
+        _newsArticleUpgrade = new GrowthBubbleUpgrade(5000, 1.25f, 1.5f, 100, Constants.NEWS_ARTICLE_NAME, Constants.NEWS_ARTICLE_DESCRIPTION);
         _influencerUpgrade = new GrowthBubbleUpgrade(25000, 2.5f, 2.25f, 200, Constants.INFLUENCER_NAME, Constants.INFLUENCER_DESCRIPTION);
         _politicalEndorsementUpgrade = new GrowthBubbleUpgrade(100000, 5f, 3.5f, 300, Constants.POLITICAL_NAME, Constants.POLITICAL_DESCRIPTION);
     }

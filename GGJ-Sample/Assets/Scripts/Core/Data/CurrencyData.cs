@@ -16,7 +16,7 @@ public class CoinData
     public float Investment {get  {return _initialInvestment + MoneySpentOnUpgrades;}}
 
     private float _rateOfChange = 1.0f;
-    public float Rate {get {return _rateOfChange * TrustManager.Instance.PlayerTrust.TotalValue;}}
+    public float Rate {get {return _rateOfChange + TrustManager.Instance.PlayerTrust.TotalValue;}}
 
     private Timer _timer;
 
