@@ -32,7 +32,7 @@ public class GameManager : PersistentMonoSingleton<GameManager>
         CurrentState.OnUpdate();
         if (TrustManager.Instance.PlayerTrust.TotalValue == 0 || CurrencyManager.Instance.Wealth.TotalValue == 0)
         {
-            Application.Quit();
+            //Application.Quit();
         }
     }
 

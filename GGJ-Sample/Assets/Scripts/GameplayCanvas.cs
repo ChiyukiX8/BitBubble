@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 public class GameplayCanvas : MonoBehaviour
 {
     public static GameplayCanvas Instance;
@@ -13,6 +14,8 @@ public class GameplayCanvas : MonoBehaviour
     private RectTransform _moneyRect;
     [SerializeField]
     private RectTransform _animatedIconsContainer;
+    [SerializeField]
+    private Button _closeGameButton;
 
     private void Awake()
     {
@@ -20,6 +23,8 @@ public class GameplayCanvas : MonoBehaviour
         {
             Instance = this;
         }
+
+        _closeGameButton.onClick.AddListener(OnCloseGameButtonClicked);
     }
 
     // Start is called before the first frame update
@@ -78,5 +83,10 @@ public class GameplayCanvas : MonoBehaviour
             lifetimeTimer += Time.deltaTime;
             soundEffectTimer += Time.deltaTime;
         }
+    }
+
+    private void OnCloseGameButtonClicked()
+    {
+        Application.Quit();
     }
 }
