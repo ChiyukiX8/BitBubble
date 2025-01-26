@@ -89,7 +89,7 @@ public class BubbleUpgradeMenu : MonoBehaviour
         // 1. show growth rate
         _bubbleValueText.text = Constants.VALUE_PREFIX + Mathf.RoundToInt(coin.Value).ToString();
         // 2. show value
-        _bubbleGrowthText.text = Constants.GROWTH_PREFIX + coin.Rate.ToString();
+        _bubbleGrowthText.text = Constants.GROWTH_PREFIX + coin.Rate.ToString("F1");
     }
 
     public void Close()

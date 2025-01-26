@@ -2,11 +2,23 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class CameraController : MonoBehaviour
 {
     public float Speed = 5.0f;
+    public float zoomSpeed = 50f;
     public Vector3 startPos;
+
+    public static CameraController Instance;
+
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+    }
 
     private void OnEnable(){
         AppEvents.OnBubbleClick.OnTrigger += SnapToBubble;
@@ -19,7 +31,7 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startPos = this.transform.position;
+        startPos = transform.position;
     }
 
     // Update is called once per frame
@@ -47,17 +59,24 @@ public class CameraController : MonoBehaviour
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
-            Camera.main.orthographicSize -= Speed * Time.deltaTime;
+            Camera.main.orthographicSize -= zoomSpeed * Time.deltaTime;
         }
 
         else if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
-            Camera.main.orthographicSize += Speed * Time.deltaTime;
+            Camera.main.orthographicSize += zoomSpeed * Time.deltaTime;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space) && CurrencyManager.Instance.CurrentBubbles.Count > 0)
+        {
+            SnapToBubble(CurrencyManager.Instance.CurrentBubbles.Keys.ToList()[0]);
         }
     }
 
-    void SnapToBubble(Guid id){
-        this.transform.position = startPos;
+    public void SnapToBubble(Guid id)
+    {
+        Bubble bubble = CurrencyManager.Instance.BubbleLookup(id);
+        transform.position = new Vector3(bubble.transform.position.x, bubble.transform.position.y, transform.position.z);
     }
 }
 

@@ -164,6 +164,7 @@ public class CreateBubblePanel : MonoBehaviour
 
             GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.SelectConfirmSFX, Constants.UI_SFX_VOLUME_MODIFER);
 
+            CameraController.Instance.SnapToBubble(_currentConfig.Id);
             Close();
         }
     }

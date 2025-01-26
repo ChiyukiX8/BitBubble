@@ -13,20 +13,25 @@ public class CoinData
     public float Value {get {return _value;} set {_value = value;}}
 
     public float _initialInvestment = 0.0f;
-    public float Investment {get  {return _initialInvestment;} set {_initialInvestment = value;}}
+    public float Investment {get  {return _initialInvestment + MoneySpentOnUpgrades;}}
 
     private float _rateOfChange = 1.0f;
-    public float Rate {get {return _rateOfChange;}}
+    public float Rate {get {return _rateOfChange * TrustManager.Instance.PlayerTrust.TotalValue;}}
 
     private Timer _timer;
 
     public List<GrowthBubbleUpgrade> Upgrades = new List<GrowthBubbleUpgrade>();
+
+    public float Profit => Value - Investment;
+
+    private int MoneySpentOnUpgrades;
 
     public CoinData(BubbleCreationConfig config)
     {
         Id = config.Id;
         Name = config.Name;
         Value = config.InitialValue;
+        _initialInvestment = config.InitialValue;
 
         StartTimer();
         AppEvents.OnUpgradeExpired.OnTrigger += RemoveUpgrade;
@@ -50,7 +55,7 @@ public class CoinData
 
     private void StartTimer()
     {
-        _timer = Timer.Register(1/_rateOfChange, UpdateValue, isLooped:true);
+        _timer = Timer.Register(1/Rate, UpdateValue, isLooped:true);
     }
 
     private void UpdateTimer()
@@ -67,6 +72,7 @@ public class CoinData
 
     public void AddUpgrade(GrowthBubbleUpgrade newUpgrade)
     {
+        MoneySpentOnUpgrades += newUpgrade.Cost;
         Upgrades.Add(newUpgrade);
         _rateOfChange = UpgradeSum();
         newUpgrade.StartTimer();

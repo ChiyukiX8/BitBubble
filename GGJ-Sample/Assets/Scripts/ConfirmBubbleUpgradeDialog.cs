@@ -54,7 +54,11 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
 
     private void UpdatePriceText(CoinData data)
     {
-        _priceText.text = $"<color=#4ACC68>+${CurrencyManager.Instance.CurrentBubbles[BubbleUpgradeMenu.OpenedBubble].Value}</color>";
+        float profit = CurrencyManager.Instance.CurrentBubbles[BubbleUpgradeMenu.OpenedBubble].Profit;
+        string profitString = profit.ToString().Trim('-');
+        string prefix = profit < 0.0f ? "-" : "+";
+        string color = profit < 0.0f ? "<color=#CC4A4A>" : "<color=#4ACC68>";
+        _priceText.text = $"{color}{prefix}${profitString}</color>";
     }
 
     public void DrawDialog(BubbleUpgrade upgrade)

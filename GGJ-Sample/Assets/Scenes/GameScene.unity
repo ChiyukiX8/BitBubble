@@ -803,6 +803,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 50
+  zoomSpeed: 250
   startPos: {x: 0, y: 0, z: 0}
 --- !u!114 &637721690
 MonoBehaviour:

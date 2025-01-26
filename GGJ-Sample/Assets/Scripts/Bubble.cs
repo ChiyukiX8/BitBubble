@@ -188,6 +188,10 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
 
     private void TriggerCursorClick()
     {
+        if(spawnedCursors.Count == 0)
+        {
+            return;
+        }
         spawnedCursors[cursorToClickNext].Click();
 
         cursorToClickNext++;
