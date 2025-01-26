@@ -56,6 +56,7 @@ public class GrowthBubbleUpgrade : BubbleUpgrade
     public override void ApplyUpgrade(Guid bubbleGuid)
     {
         // find bubble via guid, apply this upgrade to the coin data
+
     }
     public override BubbleUpgrade Copy()
     {

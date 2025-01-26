@@ -53,6 +53,8 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
         // Push the upgrade to the bubble stored via guid
         Guid openedbubble = BubbleUpgradeMenu.OpenedBubble;
 
+        Debug.Log("UPGRADE PURCHASED");
+
         _menuContainer.SetActive(false);
 
     }
