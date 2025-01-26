@@ -51,6 +51,10 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
         bubbleCollider = GetComponent<CircleCollider2D>();
         config = new BubbleCreationConfig(_config);
         // Determine radius from config.InitialValue
+        // For every 10000 in start value increase start radius by 1
+        int radiusIncrease = Mathf.RoundToInt(config.InitialValue / 10000f);
+        int initialRadius = Mathf.Clamp(radiusIncrease, 5, 1000);
+        radius = initialRadius;
         DrawBubble(radius);
         DrawIcon(_config.Icon);
 
