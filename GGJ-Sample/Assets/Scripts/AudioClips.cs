@@ -17,6 +17,9 @@ public class AudioClips : MonoBehaviour
     public AudioClipGroup SelectConfirmSFX;
     public AudioClipGroup SelectCancelSFX;
     public AudioClipGroup SelectSFX;
+    public AudioClipGroup SelectClickSFX;
+
+    public AudioClipGroup ClickSFX;
 
     public AudioClipGroupLinear MoneyAddSFX;
 

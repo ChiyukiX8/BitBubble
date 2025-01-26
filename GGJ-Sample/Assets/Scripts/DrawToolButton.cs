@@ -21,9 +21,14 @@ public class DrawToolButton : MonoBehaviour
 
     private void OnButtonClicked()
     {
+        if(_type == DrawingZone.CurrentTool)
+        {
+            return;
+        }
+
         DrawingZone.OnToolChanged.Invoke(_type);
 
-        GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.SelectSFX, Constants.UI_SFX_VOLUME_MODIFER);
+        GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.SelectClickSFX, Constants.UI_SFX_VOLUME_MODIFER);
     }
 
     private void Select()

@@ -6,6 +6,8 @@ public class Cursor : MonoBehaviour
 {
     [SerializeField]
     private GameObject _clickFXPrefab;
+    [SerializeField]
+    private SFXAudioSource _audioSource;
 
     private Bubble _bubbleTarget;
     public void Click()
@@ -13,6 +15,7 @@ public class Cursor : MonoBehaviour
         GameObject spawnedClickFX = Instantiate(_clickFXPrefab, transform.position, Quaternion.identity, null);
 
         // Play audio
+        _audioSource.PlayLocal(AudioClips.Instance.ClickSFX);
     }
 
     private void OnEnable()

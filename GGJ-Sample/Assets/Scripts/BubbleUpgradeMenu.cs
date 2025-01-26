@@ -103,7 +103,7 @@ public class BubbleUpgradeMenu : MonoBehaviour
     {
         Close();
 
-        GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.SelectCancelSFX, Constants.UI_SFX_VOLUME_MODIFER);
+        GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.SelectClickSFX, Constants.UI_SFX_VOLUME_MODIFER);
     }
 
     private void InitializeUpgradeValues()
@@ -118,7 +118,7 @@ public class BubbleUpgradeMenu : MonoBehaviour
     {
         if (OpenedBubble.Equals(coin.Id))
         {
-            _bubbleGrowthText.text = Constants.GROWTH_PREFIX + Mathf.Round(coin.Rate).ToString();
+            _bubbleGrowthText.text = Constants.GROWTH_PREFIX + coin.Rate.ToString("F1");
             _bubbleValueText.text = Constants.VALUE_PREFIX + coin.Value.ToString();
         }
     }
