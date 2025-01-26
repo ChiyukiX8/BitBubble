@@ -88,6 +88,7 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
             // idc anymore just use gameobject.find :'(
             CurrencyManager.Instance.BubbleLookup(openedbubble).Pop();
 
+            GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.PopBubbleSFX);
             // Reach out to currency manager and give us money for the pop, and call other popping logic
             AppEvents.OnBubblePop.Trigger(openedbubble);
         }

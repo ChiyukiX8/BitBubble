@@ -78,6 +78,8 @@ public class CreateBubblePanel : MonoBehaviour
         // Probably want to reach out to game manager to get a parent we can put the bubbles under
         GameObject spawnedBubble = Instantiate(_bubblePrefab, spawnPosition, Quaternion.identity, null);
 
+        GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.CreateBubbleSFX);
+
         spawnedBubble.GetComponent<Bubble>().Setup(config);
     }
 
