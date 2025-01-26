@@ -26,6 +26,10 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
     private GameObject cursorPrefab;
     [SerializeField]
     private Transform cursorContainer;
+    [SerializeField]
+    private SpriteRenderer gradient;
+    [SerializeField]
+    private Transform gradientScalePivot;
 
     private List<BubblePixel> drawnBubblePixels = new List<BubblePixel>();
     private List<BubblePixel> drawnIconPixels = new List<BubblePixel>();
@@ -73,11 +77,14 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
         if (radius == 0) return;
 
         // Clear all existing pixels, pop from end of list
-        for(int i = drawnBubblePixels.Count - 1; i >= 0; i--)
+        for (int i = drawnBubblePixels.Count - 1; i >= 0; i--)
         {
             Destroy(drawnBubblePixels[i].gameObject);
         }
         drawnBubblePixels.Clear();
+
+        gradient.color = bubbleColor;
+        gradientScalePivot.localScale = Vector3.one * radius;
 
         // Copied from ChatGPT ;)
         for (int x = -radius; x <= radius; x++)
