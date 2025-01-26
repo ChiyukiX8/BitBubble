@@ -44,6 +44,7 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
         _selectedUpgrade = null;
         _upgradeNameText.text = title;
         _descriptionText.text = description;
+        _confirmButton.interactable = true;
         _themer.SetColorTheme(CurrencyManager.Instance.BubbleConfigLookup(BubbleUpgradeMenu.OpenedBubble).Color);
         AppEvents.OnCoinUpdate.OnTrigger += UpdatePriceText;
         UpdatePriceText(null);

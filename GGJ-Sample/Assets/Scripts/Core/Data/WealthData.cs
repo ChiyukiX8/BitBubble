@@ -6,9 +6,22 @@ using UnityEngine;
 [Serializable]
 public class WealthData
 {
-    public float TotalValue = 10000.0f;
+    public float TotalValue
+    {
+        get
+        {
+            return _totalValue;
+        }
+        set
+        {
+            _totalValue = value;
+            AppEvents.OnWealthUpdate.Trigger(this);
+        }
+    }
 
     public float RealizedGains = 0.0f;
+
+    private float _totalValue = 10000.0f;
 
     public void UpdateWealth(float addedWealth)
     {

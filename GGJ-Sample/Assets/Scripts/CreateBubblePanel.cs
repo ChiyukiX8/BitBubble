@@ -145,7 +145,6 @@ public class CreateBubblePanel : MonoBehaviour
             CreateBubble(_currentConfig);
             CurrencyManager.Instance.Wealth.TotalValue -= _currentConfig.InitialValue;
             AppEvents.OnCoinCreation.Trigger(_currentConfig);
-            AppEvents.OnWealthUpdate.Trigger(CurrencyManager.Instance.Wealth);
             Close();
         }
     }

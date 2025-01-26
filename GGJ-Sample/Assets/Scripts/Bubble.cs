@@ -22,6 +22,10 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
     private Transform iconScalePivot;
     [SerializeField]
     private GameObject popParticlesPrefab;
+    [SerializeField]
+    private GameObject cursorPrefab;
+    [SerializeField]
+    private Transform cursorContainer;
 
     private List<BubblePixel> drawnBubblePixels = new List<BubblePixel>();
     private List<BubblePixel> drawnIconPixels = new List<BubblePixel>();
@@ -31,6 +35,8 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
     private int radius = 10;
     private float radAccum;
     private CircleCollider2D bubbleCollider;
+    private List<Cursor> spawnedCursors = new List<Cursor>();
+    private int cursorToClickNext = 0;
 
     private Color iconColor => config.Color;
     private Color bubbleColor => Color.Lerp(config.Color, Color.white, 0.5f);
@@ -59,8 +65,7 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
         // Invoke event, causes all pixels to get pushed outward from center
         OnBubblePopped?.Invoke(this);
 
-        gameObject.SetActive(false);
-        Destroy(gameObject, 5.0f);
+        Destroy(gameObject);
     }
 
     private void DrawBubble(int radius)
@@ -132,6 +137,8 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
     {
         if (config.Id.Equals(data.Id))
         {
+            AdjustCursorCount(Mathf.RoundToInt(data.Rate));
+            TriggerCursorClick();
             // Update radius once coin has increased $100
             radAccum += data.UpgradeSum();
             if (radAccum > 100)
@@ -142,6 +149,52 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
                 DrawIcon(config.Icon);
             }
         }
+    }
+
+    private void AdjustCursorCount(int growth)
+    {
+        if(spawnedCursors.Count == growth)
+        {
+            return;
+        }
+        else
+        {
+            cursorToClickNext = 0;
+            if(spawnedCursors.Count < growth)
+            {
+                // Create a new cursor
+                SpawnCursor();
+            }
+            else if(spawnedCursors.Count > growth)
+            {
+                // Remove a cursor
+                RemoveCursor();
+            }
+        }
+    }
+
+    private void TriggerCursorClick()
+    {
+        spawnedCursors[cursorToClickNext].Click();
+
+        cursorToClickNext++;
+        if(cursorToClickNext >= spawnedCursors.Count)
+        {
+            cursorToClickNext = 0;
+        }
+    }
+
+    private void SpawnCursor()
+    {
+        GameObject spawnedCursor = Instantiate(cursorPrefab, cursorContainer);
+        Cursor cursor = spawnedCursor.GetComponent<Cursor>();
+        cursor.SetTarget(this);
+        spawnedCursors.Add(cursor);
+    }
+    private void RemoveCursor()
+    {
+        Destroy(spawnedCursors[0]);
+        spawnedCursors.RemoveAt(0);
     }
 
     public void OnPointerDown(PointerEventData eventData)
