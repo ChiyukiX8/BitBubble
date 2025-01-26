@@ -8,6 +8,7 @@ using System;
 public class CreateBubblePanel : MonoBehaviour
 {
     public static CreateBubblePanel Instance;
+    public static bool IsOpen => Instance._menuAnimController.gameObject.activeInHierarchy;
 
     private const string DEFAULT_NAME = "New Currency Name";
 
@@ -96,9 +97,9 @@ public class CreateBubblePanel : MonoBehaviour
     {
         _colorSelector.SelectSwatch(0);
         _currentConfig = new BubbleCreationConfig(DEFAULT_NAME, 0, ColorSelector.SelectedColor, new HashSet<Vector2Int>());
-        _nameField.text = "";
+        _nameField.SetTextWithoutNotify("");
         _valueSlider.value = 0.0f;
-        SetName("");
+        _currentConfig.Name = "";
         SetValue(_currentConfig.InitialValue);
         SetColor(_currentConfig.Color);
         SetIcon(new HashSet<Vector2Int>());
@@ -132,6 +133,7 @@ public class CreateBubblePanel : MonoBehaviour
     private void SetName(string name)
     {
         _currentConfig.Name = name;
+        GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.SelectClickSFX, Constants.UI_SFX_VOLUME_MODIFER);
     }
 
     private void SetValue(float value)

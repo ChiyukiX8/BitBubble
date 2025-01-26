@@ -15,6 +15,8 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (CreateBubblePanel.IsOpen) return;
+
         if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || (Input.mousePosition.y >= Screen.height && Input.mousePosition.y < Screen.height * 1.05))
         {
             transform.position += new Vector3(0, 1.0f, 0) * Speed * Time.deltaTime;

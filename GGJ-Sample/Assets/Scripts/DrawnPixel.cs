@@ -41,6 +41,7 @@ public class DrawnPixel : MonoBehaviour,IPointerEnterHandler,IPointerDownHandler
             Draw();
         }
 
+        GlobalAudioSource.PlayAudioClipGroup(AudioClips.Instance.SelectClickSFX, Constants.UI_SFX_VOLUME_MODIFER * 0.5f);
         DrawingZone.OnPixelStateChanged.Invoke(_position, _drawnState);
     }
     public void OnPointerEnter(PointerEventData eventData)
