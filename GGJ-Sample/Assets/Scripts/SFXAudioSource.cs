@@ -8,14 +8,7 @@ public class SFXAudioSource : MonoBehaviour
 
     public void PlayGlobal(AudioClipGroup clips, float linearValue = -1.0f)
     {
-        if(clips is AudioClipGroupLinear linearClips && linearValue != -1.0f)
-        {
-            GlobalAudioSource.PlayOneShot(linearClips.GetLinearClip(linearValue), GetRandomPitch());
-        }
-        else
-        {
-            GlobalAudioSource.PlayOneShot(clips.GetRandomClip(), GetRandomPitch());
-        }
+        GlobalAudioSource.PlayAudioClipGroup(clips, linearValue);
     }
     public void PlayLocal(AudioClipGroup clips, float linearValue = -1.0f)
     {
@@ -34,7 +27,6 @@ public class SFXAudioSource : MonoBehaviour
         {
             _source.PlayOneShot(clips.GetRandomClip());
         }
-
     }
 
     private float GetRandomPitch()

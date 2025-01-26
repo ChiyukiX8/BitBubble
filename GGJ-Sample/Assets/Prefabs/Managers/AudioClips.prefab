@@ -45,20 +45,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CreateBubbleSFX:
-    _clips: []
+    _clips:
+    - {fileID: 8300000, guid: a5efd152ad1a76f45ac8180caf1cea6a, type: 3}
+    - {fileID: 8300000, guid: 4c5c78ac33038284c99ff9b25e0a2d26, type: 3}
+    - {fileID: 8300000, guid: d6786d1606d1bfd49976d2a513b75090, type: 3}
   PopBubbleSFX:
-    _clips: []
+    _clips:
+    - {fileID: 8300000, guid: 8dec2fb73bf312d47b03da535c639657, type: 3}
+    - {fileID: 8300000, guid: 3e9a2caca1b6881409af74a0bf670574, type: 3}
+    - {fileID: 8300000, guid: cd8101a110f67994eb30777654bd52a1, type: 3}
+    - {fileID: 8300000, guid: cb20bca2d7c7061409171246528f8a20, type: 3}
   BubbleUpgradeNewsSFX:
-    _clips: []
+    _clips:
+    - {fileID: 8300000, guid: 6aea2613c57b71649864624a36caec99, type: 3}
   BubbleUpgradeInfluencerSFX:
-    _clips: []
+    _clips:
+    - {fileID: 8300000, guid: 652265eceffb4fb4bb9213bd46399941, type: 3}
   BubbleUpgradePresidentialSFX:
-    _clips: []
+    _clips:
+    - {fileID: 8300000, guid: 479d8afb64b5e7341a1c06db5f8ec9b6, type: 3}
   SelectConfirmSFX:
-    _clips: []
+    _clips:
+    - {fileID: 8300000, guid: b99e9a6d07b7bb04798e1479342d9d7e, type: 3}
   SelectCancelSFX:
-    _clips: []
-  CannotSelectSFX:
-    _clips: []
+    _clips:
+    - {fileID: 8300000, guid: 93646349eb586174d98cf35ec4dd3428, type: 3}
+  SelectSFX:
+    _clips:
+    - {fileID: 8300000, guid: 42fc9be19aa8f884ba9581ea87a2cfbe, type: 3}
+    - {fileID: 8300000, guid: 15bd1ddf4cbd45e42b13d0dca5db1b25, type: 3}
   MoneySpendSFX:
     _clips: []

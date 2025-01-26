@@ -24,4 +24,21 @@ public class GlobalAudioSource : MonoBehaviour
         Instance._audioSource.pitch = pitch;
         Instance._audioSource.PlayOneShot(clip);
     }
+
+    public static void PlayAudioClipGroup(AudioClipGroup clips, float linearValue = 1.0f)
+    {
+        if (clips is AudioClipGroupLinear linearClips && linearValue != -1.0f)
+        {
+            PlayOneShot(linearClips.GetLinearClip(linearValue), GetRandomPitch());
+        }
+        else
+        {
+            PlayOneShot(clips.GetRandomClip(), GetRandomPitch());
+        }
+    }
+
+    public static float GetRandomPitch()
+    {
+        return Random.Range(0.975f, 1.025f);
+    }
 }

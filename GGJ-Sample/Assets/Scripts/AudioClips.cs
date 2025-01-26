@@ -15,10 +15,23 @@ public class AudioClips : MonoBehaviour
 
     public AudioClipGroup SelectConfirmSFX;
     public AudioClipGroup SelectCancelSFX;
-    public AudioClipGroup CannotSelectSFX;
+    public AudioClipGroup SelectSFX;
 
     public AudioClipGroupLinear MoneySpendSFX;
 
+    public static AudioClipGroup GetClipGroupByUpgrade(string name)
+    {
+        switch (name)
+        {
+            default:
+            case Constants.NEWS_ARTICLE_NAME:
+                return Instance.BubbleUpgradeNewsSFX;
+            case Constants.INFLUENCER_NAME:
+                return Instance.BubbleUpgradeInfluencerSFX;
+            case Constants.POLITICAL_NAME:
+                return Instance.BubbleUpgradePresidentialSFX;
+        }
+    }
     private void Awake()
     {
         if(Instance == null)

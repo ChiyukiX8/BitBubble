@@ -95,7 +95,7 @@ public class ConfirmBubbleUpgradeDialog : MonoBehaviour
         {
             if (_selectedUpgrade.CanPurchase())
             {
-                Debug.Log("UPGRADE PURCHASED");
+                GlobalAudioSource.PlayAudioClipGroup(AudioClips.GetClipGroupByUpgrade(_selectedUpgrade.Name));
                 CurrencyManager.Instance.PurchaseUpgrade(openedbubble, _selectedUpgrade);
             }
         }
