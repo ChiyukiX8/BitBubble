@@ -34,5 +34,15 @@ public class CameraController : MonoBehaviour
         {
             transform.position += new Vector3(1.0f, 0, 0) * Speed * Time.deltaTime;
         }
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        {
+            Camera.main.orthographicSize -= Speed * Time.deltaTime;
+        }
+
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        {
+            Camera.main.orthographicSize += Speed * Time.deltaTime;
+        }
     }
 }
