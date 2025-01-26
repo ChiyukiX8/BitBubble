@@ -21,6 +21,8 @@ public class CurrencyManager : PersistentMonoSingleton<CurrencyManager>
             _gameManager = GameManager.Instance;
             AppEvents.OnGameStateUpdate.Trigger(EGameState.Play);
         }
+
+        AppEvents.OnWealthUpdate.Trigger(Wealth);
     }
 
     void OnDestroy()
@@ -42,7 +44,16 @@ public class CurrencyManager : PersistentMonoSingleton<CurrencyManager>
     {
         CoinData coin =  new CoinData(newConfig);
         CurrentBubbles.Add(coin.Id, coin);
-        
+    }
+
+    public void PurchaseUpgrade(Guid id, BubbleUpgrade upgrade)
+    {
+        if (upgrade is GrowthBubbleUpgrade)
+        {
+            Wealth.TotalValue -=  upgrade.Cost;
+            CurrentBubbles[id].AddUpgrade((GrowthBubbleUpgrade)upgrade);
+            AppEvents.OnWealthUpdate.Trigger(Wealth);
+        }
     }
 
     public BubbleCreationConfig BubbleConfigLookup(Guid id)
@@ -62,5 +73,6 @@ public class CurrencyManager : PersistentMonoSingleton<CurrencyManager>
     public void BubblePopped(Guid coinId)
     {
         Wealth.TotalValue += CurrentBubbles[coinId].Value;
+        AppEvents.OnWealthUpdate.Trigger(Wealth);
     }
 }
