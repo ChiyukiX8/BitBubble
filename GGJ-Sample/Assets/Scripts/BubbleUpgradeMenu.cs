@@ -39,16 +39,6 @@ public class BubbleUpgradeMenu : MonoBehaviour
 
     private Guid _openedBubble;
 
-    private const string NEWS_ARTICLE_NAME = "News Article";
-    private const string NEWS_ARTICLE_DESCRIPTION = "Pay a news outlet to run an article about your currency.";
-    private const string INFLUENCER_NAME = "Hire Influencer";
-    private const string INFLUENCER_DESCRIPTION = "Pay an influencer to run a social media campaign for your currency.";
-    private const string POLITICAL_NAME = "Political Endorsement";
-    private const string POLITICAL_DESCRIPTION = "Pay a politician to publicly endourse your currency.";
-    private const string POP_DESCRIPTION = "Popping this will take it off the market, and give you all the money others have invested.\nYour trust will decrease for every active buyer.";
-    private const string GROWTH_PREFIX = "Growth: ";
-    private const string VALUE_PREFIX = "Value: ";
-
     private void Awake()
     {
         if(Instance == null)
@@ -88,9 +78,9 @@ public class BubbleUpgradeMenu : MonoBehaviour
         // find coin data via guid and generate menu data
         CoinData coin = CurrencyManager.Instance.CurrentBubbles[_openedBubble];
         // 1. show growth rate
-        _bubbleValueText.text = VALUE_PREFIX + Mathf.RoundToInt(coin.Value).ToString();
+        _bubbleValueText.text = Constants.VALUE_PREFIX + Mathf.RoundToInt(coin.Value).ToString();
         // 2. show value
-        _bubbleGrowthText.text = GROWTH_PREFIX + coin.Rate.ToString();
+        _bubbleGrowthText.text = Constants.GROWTH_PREFIX + coin.Rate.ToString();
     }
 
     public void Close()
@@ -108,17 +98,17 @@ public class BubbleUpgradeMenu : MonoBehaviour
     private void InitializeUpgradeValues()
     {
         // Idk what these numbers should be just putting incrementally higher ones for now
-        _newsArticleUpgrade = new GrowthBubbleUpgrade(5000, 1.25f, 1.5f, 100, NEWS_ARTICLE_NAME, NEWS_ARTICLE_DESCRIPTION);
-        _influencerUpgrade = new GrowthBubbleUpgrade(25000, 2.5f, 2.25f, 200, INFLUENCER_NAME, INFLUENCER_DESCRIPTION);
-        _politicalEndorsementUpgrade = new GrowthBubbleUpgrade(100000, 5f, 3.5f, 300, POLITICAL_NAME, POLITICAL_DESCRIPTION);
+        _newsArticleUpgrade = new GrowthBubbleUpgrade(5000, 1.25f, 1.5f, 100, Constants.NEWS_ARTICLE_NAME, Constants.NEWS_ARTICLE_DESCRIPTION);
+        _influencerUpgrade = new GrowthBubbleUpgrade(25000, 2.5f, 2.25f, 200, Constants.INFLUENCER_NAME, Constants.INFLUENCER_DESCRIPTION);
+        _politicalEndorsementUpgrade = new GrowthBubbleUpgrade(100000, 5f, 3.5f, 300, Constants.POLITICAL_NAME, Constants.POLITICAL_DESCRIPTION);
     }
 
     private void OnCoinUpdated(CoinData coin)
     {
         if (OpenedBubble.Equals(coin.Id))
         {
-            _bubbleGrowthText.text = GROWTH_PREFIX + Mathf.Round(coin.Rate).ToString();
-            _bubbleValueText.text = VALUE_PREFIX + coin.Value.ToString();
+            _bubbleGrowthText.text = Constants.GROWTH_PREFIX + Mathf.Round(coin.Rate).ToString();
+            _bubbleValueText.text = Constants.VALUE_PREFIX + coin.Value.ToString();
         }
     }
 
@@ -126,7 +116,7 @@ public class BubbleUpgradeMenu : MonoBehaviour
     {
         BubbleCreationConfig currentBubble = CurrencyManager.Instance.BubbleConfigLookup(_openedBubble);
         string title = "Pop " + currentBubble.Name + "?";
-        string description = POP_DESCRIPTION;
+        string description = Constants.POP_DESCRIPTION;
         ConfirmBubbleUpgradeDialog.Instance.DrawPopDialog(title, description);
     }
 }
