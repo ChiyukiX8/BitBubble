@@ -193,7 +193,7 @@ public class Bubble : MonoBehaviour, IPointerDownHandler
     }
     private void RemoveCursor()
     {
-        Destroy(spawnedCursors[0]);
+        Destroy(spawnedCursors[0].gameObject);
         spawnedCursors.RemoveAt(0);
     }
 

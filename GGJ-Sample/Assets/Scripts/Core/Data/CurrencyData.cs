@@ -29,6 +29,7 @@ public class CoinData
         Value = config.InitialValue;
 
         StartTimer();
+        AppEvents.OnUpgradeExpired.OnTrigger += RemoveUpgrade;
     }
 
     public CoinData(CoinData copy)
@@ -40,6 +41,11 @@ public class CoinData
         _rateOfChange = copy._rateOfChange;
         
         StartTimer();
+    }
+
+    ~CoinData()
+    {
+        AppEvents.OnUpgradeExpired.OnTrigger += RemoveUpgrade;
     }
 
     private void StartTimer()
@@ -63,17 +69,23 @@ public class CoinData
     {
         Upgrades.Add(newUpgrade);
         _rateOfChange = UpgradeSum();
+        newUpgrade.StartTimer();
         UpdateTimer();
     }
 
-    public void RemoveUpgrade()
+    public void RemoveUpgrade(BubbleUpgrade upgrade)
     {
-
+        if (upgrade is GrowthBubbleUpgrade)
+        {
+            Upgrades.Remove((GrowthBubbleUpgrade)upgrade);
+            _rateOfChange = UpgradeSum();
+            UpdateTimer();
+        }
     }
 
     public float UpgradeSum()
     {
-        float sum = 0;
+        float sum = 1;
         foreach (GrowthBubbleUpgrade upgrade in Upgrades)
         {
             sum += upgrade.GrowthMagnitude;

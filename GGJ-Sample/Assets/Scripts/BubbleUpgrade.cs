@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityTimer;
 
 public abstract class BubbleUpgrade
 {
     public string Description => _description;
     public string Name => _name;
     public int Cost => _cost;
+    public Timer Timer;
 
     protected int _baseCost;
     protected int _purchaseCount;
@@ -34,8 +36,13 @@ public abstract class BubbleUpgrade
         _cost = Mathf.RoundToInt(_baseCost * (_purchaseCount * _priceIncreaseMultiplier));
         _purchaseCount++;
     }
+    public abstract void StartTimer();
     public abstract BubbleUpgrade Copy();
     public abstract void ApplyUpgrade(Guid bubbleGuid);
+    public virtual void UpgradeExpired()
+    {
+        AppEvents.OnUpgradeExpired.Trigger(this);
+    }
 }
 
 /// <summary>
@@ -54,6 +61,10 @@ public class GrowthBubbleUpgrade : BubbleUpgrade
     {
         _growthMagnitude = magnitude;
         _duration = duration;
+    }
+    public override void StartTimer()
+    {
+        Timer = Timer.Register(_duration, UpgradeExpired);
     }
     public override void ApplyUpgrade(Guid bubbleGuid)
     {

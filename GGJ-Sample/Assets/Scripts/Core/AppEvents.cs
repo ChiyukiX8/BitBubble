@@ -16,6 +16,7 @@ public class AppEvents : MonoBehaviour
 
     public static readonly AppEvent<Guid> OnBubbleClick = new AppEvent<Guid>();
     public static readonly AppEvent<Guid> OnBubblePop = new AppEvent<Guid>();
+    public static readonly AppEvent<BubbleUpgrade> OnUpgradeExpired = new AppEvent<BubbleUpgrade>();
 }
 
 public abstract class BaseEvent
