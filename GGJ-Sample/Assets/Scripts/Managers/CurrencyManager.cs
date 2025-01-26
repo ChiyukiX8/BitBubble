@@ -8,7 +8,7 @@ public class CurrencyManager : PersistentMonoSingleton<CurrencyManager>
     private GameManager _gameManager;
 
     private Timer _coinUpdateTimer;
-    public WealthData Wealth = new WealthData(100000.0f);
+    public WealthData Wealth = new WealthData(75000.0f);
 
 
     public Dictionary<Guid,CoinData> CurrentBubbles = new Dictionary<Guid, CoinData>();

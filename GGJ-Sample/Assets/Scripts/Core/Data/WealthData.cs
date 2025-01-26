@@ -33,6 +33,8 @@ public class WealthData
 
     }
 
+    public WealthData () {}
+
     public WealthData(float value)
     {
         TotalValue = value;
